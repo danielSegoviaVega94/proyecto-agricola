@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Mi perfil — Punto de Venta Agricultura</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--sp-3); margin-top: var(--sp-4); }
+  .stat { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--r-md); padding: var(--sp-3); text-align: center; }
+  .stat .v { font-size: var(--fs-xl); font-weight: 700; color: var(--brand-strong); letter-spacing: -0.01em; }
+  .stat .l { font-size: 11px; color: var(--text-muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+  .quick-action {
+    display: flex; align-items: center; gap: var(--sp-3);
+    padding: var(--sp-4); background: var(--surface);
+    border: 1px solid var(--border-soft); border-radius: var(--r-md);
+    text-decoration: none; color: inherit;
+  }
+  .quick-action:hover { background: var(--bg); }
+  .quick-action .ico {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--brand-soft); color: var(--brand);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .quick-action .body { flex: 1; }
+  .quick-action .body strong { display: block; font-size: var(--fs-base); }
+  .quick-action .body span { display: block; font-size: var(--fs-sm); color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="phone-frame">
+  <header class="app-header">
+    <h1>Mi perfil</h1>
+    <button class="icon-btn" aria-label="Configuración">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </header>
+
+  <main class="content">
+    <div class="row gap-3 mt-2">
+      <div class="avatar xl">DL</div>
+      <div class="flex-1">
+        <h2 style="margin: 0 0 4px; font-size: var(--fs-xl); font-weight: 700; letter-spacing: -0.02em;">Don Luis Vargas</h2>
+        <div class="text-muted" style="font-size: var(--fs-sm);">Chacra Don Luis · Vicuña</div>
+        <div class="row gap-2 mt-2" style="font-size: var(--fs-sm);">
+          <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg></div>
+          <span><strong>4.9</strong> · 24 valoraciones</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="profile.html" class="btn btn-secondary mt-4 btn-block">Ver mi perfil público</a>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="v">8</div><div class="l">Productos</div></div>
+      <div class="stat"><div class="v">12</div><div class="l">Chats</div></div>
+      <div class="stat"><div class="v">4.9</div><div class="l">Rating</div></div>
+    </div>
+
+    <h2 class="section-title">Acciones rápidas</h2>
+    <div class="grid-1">
+      <a href="publish.html" class="quick-action">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <div class="body">
+          <strong>Publicar producto</strong>
+          <span>Foto, descripción y precios</span>
+        </div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color: var(--text-muted);"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <a href="catalog.html" class="quick-action">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+        </div>
+        <div class="body">
+          <strong>Mis productos (8)</strong>
+          <span>Editar, pausar o eliminar</span>
+        </div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color: var(--text-muted);"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <a href="chat-list.html" class="quick-action">
+        <div class="ico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4a8 8 0 1 1 16-4z"/></svg>
+        </div>
+        <div class="body">
+          <strong>Conversaciones</strong>
+          <span>3 sin leer</span>
+        </div>
+        <span class="badge badge-brand">3</span>
+      </a>
+    </div>
+
+    <h2 class="section-title">Últimas valoraciones</h2>
+    <div class="card">
+      <div class="row gap-2">
+        <div class="stars lg"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg></div>
+        <span class="text-muted" style="font-size: var(--fs-sm); margin-left: auto;">hace 2 días</span>
+      </div>
+      <p style="margin: var(--sp-2) 0 var(--sp-2); color: var(--text);">"Tomate de muy buena calidad, llegamos rápido al acuerdo."</p>
+      <div class="text-muted" style="font-size: var(--fs-sm);">— Restaurant La Marina</div>
+    </div>
+
+    <button class="btn btn-ghost mt-6 btn-block" style="color: var(--danger);">Cerrar sesión</button>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="landing.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8v10a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></svg>Inicio</a>
+    <a href="catalog.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Buscar</a>
+    <a href="chat-list.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4a8 8 0 1 1 16-4z"/></svg>Chat</a>
+    <a href="dashboard.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>Yo</a>
+  </nav>
+</div>
+</body>
+</html>

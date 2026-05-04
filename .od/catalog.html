@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Productos — Punto de Venta Agricultura</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="phone-frame">
+  <header class="app-header">
+    <button class="icon-btn" aria-label="Volver" onclick="history.back()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <h1>Productos</h1>
+    <button class="icon-btn" aria-label="Filtrar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+    </button>
+  </header>
+
+  <main class="content">
+    <div class="searchbar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" value="tomate" placeholder="Buscar..." inputmode="search" />
+    </div>
+
+    <div class="chips mt-3">
+      <button class="chip chip-brand active">Todas</button>
+      <button class="chip">Verduras</button>
+      <button class="chip">Frutas</button>
+      <button class="chip">Hierbas</button>
+      <button class="chip">Hortalizas</button>
+    </div>
+
+    <div class="row gap-3 mt-3" style="overflow-x: auto;">
+      <button class="badge" style="height: 36px; padding: 0 14px; gap: 6px; cursor: pointer;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Vicuña
+      </button>
+      <button class="badge" style="height: 36px; padding: 0 14px; gap: 6px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+        4+ estrellas
+      </button>
+      <button class="badge" style="height: 36px; padding: 0 14px;">Precio bajo</button>
+    </div>
+
+    <div class="row between mt-4 mb-3">
+      <span class="text-muted" style="font-size: var(--fs-sm);">12 resultados</span>
+      <button class="btn-ghost" style="height: auto; padding: 4px 8px; font-size: var(--fs-sm); font-weight: 500;">Recientes ↓</button>
+    </div>
+
+    <div class="grid-2">
+      <article class="product-card">
+        <div class="thumb">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 0 2 .8 2 2-.5 0-1 .3-1.3.8C13.6 5 14 6 14 6.5c.5-1 1.5-1.5 2.5-1.5 2 0 4 1.8 4 4.5 0 5-4 11-8.5 11S3.5 14.5 3.5 9.5C3.5 6.8 5.5 5 7.5 5c1 0 2 .5 2.5 1.5 0-.5.4-1.5 1.3-1.7C11 4.3 10.5 4 10 4c0-1.2 1-2 2-2z"/></svg>
+        </div>
+        <div class="body">
+          <h3 class="title">Tomate orgánico</h3>
+          <div class="meta">
+            <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg></div>
+            <span>4.9 · Vicuña</span>
+          </div>
+          <div class="price">$1.300 <small>/kg desde 30kg</small></div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="thumb">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 0 2 .8 2 2-.5 0-1 .3-1.3.8C13.6 5 14 6 14 6.5c.5-1 1.5-1.5 2.5-1.5 2 0 4 1.8 4 4.5 0 5-4 11-8.5 11S3.5 14.5 3.5 9.5C3.5 6.8 5.5 5 7.5 5c1 0 2 .5 2.5 1.5 0-.5.4-1.5 1.3-1.7C11 4.3 10.5 4 10 4c0-1.2 1-2 2-2z" opacity=".5"/></svg>
+        </div>
+        <div class="body">
+          <h3 class="title">Tomate cherry</h3>
+          <div class="meta">
+            <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg></div>
+            <span>4.6 · La Serena</span>
+          </div>
+          <div class="price">$1.800 <small>/kg</small></div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="thumb">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 0 2 .8 2 2-.5 0-1 .3-1.3.8C13.6 5 14 6 14 6.5c.5-1 1.5-1.5 2.5-1.5 2 0 4 1.8 4 4.5 0 5-4 11-8.5 11S3.5 14.5 3.5 9.5C3.5 6.8 5.5 5 7.5 5c1 0 2 .5 2.5 1.5 0-.5.4-1.5 1.3-1.7C11 4.3 10.5 4 10 4c0-1.2 1-2 2-2z"/></svg>
+        </div>
+        <div class="body">
+          <h3 class="title">Tomate roma</h3>
+          <div class="meta">
+            <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg></div>
+            <span>4.8 · Ovalle</span>
+          </div>
+          <div class="price">$1.100 <small>/kg desde 20kg</small></div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="thumb">
+          <svg viewBox="0 0 24 24" fill="currentColor" opacity=".7"><path d="M12 2c1 0 2 .8 2 2-.5 0-1 .3-1.3.8C13.6 5 14 6 14 6.5c.5-1 1.5-1.5 2.5-1.5 2 0 4 1.8 4 4.5 0 5-4 11-8.5 11S3.5 14.5 3.5 9.5C3.5 6.8 5.5 5 7.5 5c1 0 2 .5 2.5 1.5 0-.5.4-1.5 1.3-1.7C11 4.3 10.5 4 10 4c0-1.2 1-2 2-2z"/></svg>
+        </div>
+        <div class="body">
+          <h3 class="title">Tomate larga vida</h3>
+          <div class="meta">
+            <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg></div>
+            <span>4.4 · Coquimbo</span>
+          </div>
+          <div class="price">$950 <small>/kg desde 50kg</small></div>
+        </div>
+      </article>
+      <a href="product.html" class="product-card" style="text-decoration: none; color: inherit;">
+        <div class="thumb">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 0 2 .8 2 2-.5 0-1 .3-1.3.8C13.6 5 14 6 14 6.5c.5-1 1.5-1.5 2.5-1.5 2 0 4 1.8 4 4.5 0 5-4 11-8.5 11S3.5 14.5 3.5 9.5C3.5 6.8 5.5 5 7.5 5c1 0 2 .5 2.5 1.5 0-.5.4-1.5 1.3-1.7C11 4.3 10.5 4 10 4c0-1.2 1-2 2-2z"/></svg>
+          <span class="badge badge-brand" style="position: absolute; top: 8px; left: 8px;">Destacado</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Tomate Don Luis · Vicuña</h3>
+          <div class="meta">
+            <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg></div>
+            <span>5.0 · Vicuña</span>
+          </div>
+          <div class="price">$1.300 <small>/kg desde 30kg</small></div>
+        </div>
+      </a>
+      <article class="product-card">
+        <div class="thumb">
+          <svg viewBox="0 0 24 24" fill="currentColor" opacity=".6"><path d="M12 2c1 0 2 .8 2 2-.5 0-1 .3-1.3.8C13.6 5 14 6 14 6.5c.5-1 1.5-1.5 2.5-1.5 2 0 4 1.8 4 4.5 0 5-4 11-8.5 11S3.5 14.5 3.5 9.5C3.5 6.8 5.5 5 7.5 5c1 0 2 .5 2.5 1.5 0-.5.4-1.5 1.3-1.7C11 4.3 10.5 4 10 4c0-1.2 1-2 2-2z"/></svg>
+        </div>
+        <div class="body">
+          <h3 class="title">Tomate pera</h3>
+          <div class="meta">
+            <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg></div>
+            <span>4.5 · La Serena</span>
+          </div>
+          <div class="price">$1.600 <small>/kg</small></div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="landing.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8v10a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></svg>Inicio</a>
+    <a href="catalog.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Buscar</a>
+    <a href="chat-list.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4a8 8 0 1 1 16-4z"/></svg>Chat</a>
+    <a href="dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>Yo</a>
+  </nav>
+</div>
+</body>
+</html>

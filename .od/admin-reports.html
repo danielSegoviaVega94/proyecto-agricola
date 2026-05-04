@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Reportes — Admin</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .admin-tag {
+    background: var(--text);
+    color: white;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: var(--r-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .report-row {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-md);
+    padding: var(--sp-4);
+    margin-bottom: var(--sp-3);
+  }
+  .report-meta {
+    display: flex; gap: var(--sp-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--sp-3);
+  }
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--sp-3); margin-bottom: var(--sp-4); }
+  .summary { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--r-md); padding: var(--sp-3); text-align: center; }
+  .summary .v { font-size: var(--fs-xl); font-weight: 700; }
+  .summary .l { font-size: 11px; color: var(--text-muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+  .summary.danger .v { color: var(--danger); }
+  .summary.warn .v { color: var(--warn); }
+  .summary.ok .v { color: var(--brand); }
+</style>
+</head>
+<body>
+<div class="phone-frame">
+  <header class="app-header" style="background: var(--text); color: white; border-bottom-color: rgba(255,255,255,0.1);">
+    <button class="icon-btn" aria-label="Volver" onclick="history.back()" style="color: white;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <div class="row gap-2">
+      <h1 style="color: white;">Reportes</h1>
+      <span class="admin-tag" style="background: var(--sun); color: var(--text);">Admin</span>
+    </div>
+    <span style="width: 44px;"></span>
+  </header>
+
+  <main class="content">
+    <div class="summary-grid">
+      <div class="summary danger">
+        <div class="v">3</div>
+        <div class="l">Pendientes</div>
+      </div>
+      <div class="summary warn">
+        <div class="v">1</div>
+        <div class="l">En revisión</div>
+      </div>
+      <div class="summary ok">
+        <div class="v">12</div>
+        <div class="l">Resueltos</div>
+      </div>
+    </div>
+
+    <div class="row gap-2 mb-3" style="overflow-x: auto;">
+      <button class="chip chip-brand active">Pendientes (3)</button>
+      <button class="chip">En revisión (1)</button>
+      <button class="chip">Resueltos</button>
+      <button class="chip">Todos</button>
+    </div>
+
+    <div class="report-row">
+      <div class="report-meta">
+        <span class="badge badge-danger">Pendiente</span>
+        <span class="badge">#R-0042</span>
+        <span class="badge">hace 2 horas</span>
+      </div>
+      <div class="row gap-2 mb-2">
+        <div class="avatar" style="background: var(--info-soft); color: var(--info);">JP</div>
+        <div>
+          <div class="fw-semi" style="font-size: var(--fs-sm);">Juan Pérez reporta a</div>
+          <div style="font-size: var(--fs-base); font-weight: 600;">Don Luis Vargas</div>
+        </div>
+      </div>
+      <div class="text-muted" style="font-size: var(--fs-sm); margin-bottom: var(--sp-2);">Sobre: Tomate orgánico (conv #C-1287)</div>
+      <p style="margin: 0 0 var(--sp-3); padding: var(--sp-3); background: var(--bg); border-radius: var(--r-sm); font-size: var(--fs-sm); color: var(--text-soft); line-height: 1.5;">
+        "El vendedor canceló el trato a último minuto sin avisar. Llegué al punto de entrega y nunca apareció."
+      </p>
+      <div class="row gap-2">
+        <button class="btn btn-secondary btn-sm flex-1">Ver chat</button>
+        <button class="btn btn-secondary btn-sm flex-1">Descartar</button>
+        <button class="btn btn-danger btn-sm flex-1">Suspender</button>
+      </div>
+    </div>
+
+    <div class="report-row">
+      <div class="report-meta">
+        <span class="badge badge-danger">Pendiente</span>
+        <span class="badge">#R-0041</span>
+        <span class="badge">ayer</span>
+      </div>
+      <div class="row gap-2 mb-2">
+        <div class="avatar">FN</div>
+        <div>
+          <div class="fw-semi" style="font-size: var(--fs-sm);">Feria Norte · Carla reporta a</div>
+          <div style="font-size: var(--fs-base); font-weight: 600;">Pablo González</div>
+        </div>
+      </div>
+      <div class="text-muted" style="font-size: var(--fs-sm); margin-bottom: var(--sp-2);">Sobre: Manzana fuji (conv #C-1280)</div>
+      <p style="margin: 0 0 var(--sp-3); padding: var(--sp-3); background: var(--bg); border-radius: var(--r-sm); font-size: var(--fs-sm); color: var(--text-soft); line-height: 1.5;">
+        "El producto recibido no coincide con la foto publicada. Manzanas en mal estado."
+      </p>
+      <div class="row gap-2">
+        <button class="btn btn-secondary btn-sm flex-1">Ver chat</button>
+        <button class="btn btn-secondary btn-sm flex-1">Descartar</button>
+        <button class="btn btn-danger btn-sm flex-1">Suspender</button>
+      </div>
+    </div>
+
+    <div class="report-row">
+      <div class="report-meta">
+        <span class="badge badge-danger">Pendiente</span>
+        <span class="badge">#R-0040</span>
+        <span class="badge">hace 2 días</span>
+      </div>
+      <div class="row gap-2 mb-2">
+        <div class="avatar" style="background: var(--sun-soft); color: var(--warn);">MV</div>
+        <div>
+          <div class="fw-semi" style="font-size: var(--fs-sm);">Marcela Villarroel reporta a</div>
+          <div style="font-size: var(--fs-base); font-weight: 600;">Usuario "Ofertas24"</div>
+        </div>
+      </div>
+      <div class="text-muted" style="font-size: var(--fs-sm); margin-bottom: var(--sp-2);">Sobre: Cilantro fresco (conv #C-1271)</div>
+      <p style="margin: 0 0 var(--sp-3); padding: var(--sp-3); background: var(--bg); border-radius: var(--r-sm); font-size: var(--fs-sm); color: var(--text-soft); line-height: 1.5;">
+        "Está intentando llevarme a un sitio externo para pagar por adelantado. Parece estafa."
+      </p>
+      <div class="row gap-2">
+        <button class="btn btn-secondary btn-sm flex-1">Ver chat</button>
+        <button class="btn btn-secondary btn-sm flex-1">Descartar</button>
+        <button class="btn btn-danger btn-sm flex-1">Suspender</button>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Conversaciones — Punto de Venta Agricultura</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="phone-frame">
+  <header class="app-header">
+    <h1>Conversaciones</h1>
+    <button class="icon-btn" aria-label="Buscar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    </button>
+  </header>
+
+  <main class="content" style="padding: 0 0 96px;">
+    <div class="row gap-2" style="padding: var(--sp-3) var(--sp-4) 0; overflow-x: auto;">
+      <button class="chip chip-brand active">Todas</button>
+      <button class="chip">Sin leer (3)</button>
+      <button class="chip">Como vendedor</button>
+      <button class="chip">Como comprador</button>
+    </div>
+
+    <div style="margin-top: var(--sp-3);">
+      <a href="chat-thread.html" class="conv-item">
+        <div class="avatar">RM</div>
+        <div class="conv-body">
+          <div class="conv-name">Restaurant La Marina</div>
+          <div class="conv-product">Sobre: Tomate orgánico recién cosechado</div>
+          <div class="conv-last fw-semi" style="color: var(--text);">¿Tienes 50kg disponibles para el viernes?</div>
+        </div>
+        <div class="conv-meta">
+          <span style="font-weight: 600; color: var(--brand);">10:24</span>
+          <div class="dot-unread"></div>
+        </div>
+      </a>
+
+      <a href="chat-thread.html" class="conv-item">
+        <div class="avatar" style="background: var(--sun-soft); color: var(--warn);">MV</div>
+        <div class="conv-body">
+          <div class="conv-name">Marcela Villarroel</div>
+          <div class="conv-product">Sobre: Lechuga hidropónica</div>
+          <div class="conv-last fw-semi" style="color: var(--text);">Perfecto, paso mañana a las 9</div>
+        </div>
+        <div class="conv-meta">
+          <span style="font-weight: 600; color: var(--brand);">9:02</span>
+          <div class="dot-unread"></div>
+        </div>
+      </a>
+
+      <a href="chat-thread.html" class="conv-item">
+        <div class="avatar" style="background: var(--info-soft); color: var(--info);">JP</div>
+        <div class="conv-body">
+          <div class="conv-name">Juan Pérez</div>
+          <div class="conv-product">Sobre: Uva de mesa Elqui</div>
+          <div class="conv-last">Tú: Disponible toda la semana, pase cuando guste</div>
+        </div>
+        <div class="conv-meta">
+          <span>ayer</span>
+        </div>
+      </a>
+
+      <a href="chat-thread.html" class="conv-item">
+        <div class="avatar">FN</div>
+        <div class="conv-body">
+          <div class="conv-name">Feria Norte · Carla</div>
+          <div class="conv-product">Sobre: Zapallo italiano</div>
+          <div class="conv-last fw-semi" style="color: var(--text);">¿Aceptas pago contra entrega?</div>
+        </div>
+        <div class="conv-meta">
+          <span style="font-weight: 600; color: var(--brand);">ayer</span>
+          <div class="dot-unread"></div>
+        </div>
+      </a>
+
+      <a href="chat-thread.html" class="conv-item">
+        <div class="avatar" style="background: var(--border-soft);">AC</div>
+        <div class="conv-body">
+          <div class="conv-name">Ana Carrasco</div>
+          <div class="conv-product">Sobre: Cilantro fresco</div>
+          <div class="conv-last">Trato cerrado · Valoración: 5 estrellas</div>
+        </div>
+        <div class="conv-meta">
+          <span>3 mayo</span>
+        </div>
+      </a>
+
+      <a href="chat-thread.html" class="conv-item">
+        <div class="avatar" style="background: var(--border-soft);">PG</div>
+        <div class="conv-body">
+          <div class="conv-name">Pablo González</div>
+          <div class="conv-product">Sobre: Manzana fuji</div>
+          <div class="conv-last">Tú: Gracias por preguntar, le confirmo mañana</div>
+        </div>
+        <div class="conv-meta">
+          <span>2 mayo</span>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="landing.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8v10a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></svg>Inicio</a>
+    <a href="catalog.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Buscar</a>
+    <a href="chat-list.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4a8 8 0 1 1 16-4z"/></svg>Chat</a>
+    <a href="dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>Yo</a>
+  </nav>
+</div>
+</body>
+</html>

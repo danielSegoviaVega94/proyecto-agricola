@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Tu perfil — Punto de Venta Agricultura</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .stepper { display: flex; gap: 6px; margin-bottom: var(--sp-6); }
+  .stepper span { flex: 1; height: 4px; background: var(--border); border-radius: 2px; }
+  .stepper span.done { background: var(--brand); }
+  .avatar-pick {
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    background: var(--brand-soft);
+    color: var(--brand);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto var(--sp-4);
+    border: 2px dashed var(--brand);
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="phone-frame">
+  <header class="app-header">
+    <button class="icon-btn" aria-label="Volver" onclick="history.back()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <h1>Tu perfil</h1>
+    <button class="btn-ghost" style="height: auto; padding: 4px 12px;">Saltar</button>
+  </header>
+
+  <main class="content">
+    <div class="stepper">
+      <span class="done"></span>
+      <span class="done"></span>
+      <span></span>
+    </div>
+
+    <h2 style="margin: 0 0 var(--sp-2); font-size: var(--fs-xl); font-weight: 700; letter-spacing: -0.02em;">Cuéntanos de ti</h2>
+    <p style="margin: 0 0 var(--sp-6); color: var(--text-soft);">Solo nos toma 1 minuto. Esto ayuda a que otros confíen en ti.</p>
+
+    <div class="avatar-pick" role="button" aria-label="Subir foto de perfil">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+    </div>
+    <p style="text-align: center; font-size: var(--fs-sm); color: var(--text-muted); margin: 0 0 var(--sp-6);">Toca para subir tu foto (opcional)</p>
+
+    <div class="field">
+      <label for="name">Tu nombre</label>
+      <input id="name" class="input" type="text" placeholder="Ej: Luis Vargas" autocomplete="name" />
+    </div>
+
+    <div class="field">
+      <label for="biz">Nombre del negocio <span class="text-muted">(opcional)</span></label>
+      <input id="biz" class="input" type="text" placeholder="Ej: Chacra Don Luis" />
+      <div class="field-hint">Si no tienes negocio formal, déjalo vacío.</div>
+    </div>
+
+    <div class="field">
+      <label for="comuna">Comuna</label>
+      <select id="comuna" class="select">
+        <option value="">Selecciona tu comuna</option>
+        <optgroup label="Región de Coquimbo">
+          <option>La Serena</option>
+          <option>Coquimbo</option>
+          <option selected>Vicuña</option>
+          <option>Paihuano</option>
+          <option>Andacollo</option>
+          <option>Ovalle</option>
+          <option>Monte Patria</option>
+          <option>Combarbalá</option>
+          <option>Punitaqui</option>
+          <option>Río Hurtado</option>
+          <option>Illapel</option>
+          <option>Salamanca</option>
+          <option>Los Vilos</option>
+          <option>Canela</option>
+          <option>La Higuera</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <a href="dashboard.html" class="btn btn-primary mt-4">Listo, vamos</a>
+  </main>
+</div>
+</body>
+</html>

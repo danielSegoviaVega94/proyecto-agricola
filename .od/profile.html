@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Don Luis Vargas — Punto de Venta Agricultura</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .profile-cover {
+    background: linear-gradient(180deg, var(--brand-soft), var(--bg));
+    padding: var(--sp-6) var(--sp-4) var(--sp-4);
+    text-align: center;
+  }
+  .review {
+    padding: var(--sp-4) 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .review:last-child { border-bottom: none; }
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-soft);
+    margin: 0 calc(-1 * var(--sp-4));
+    padding: 0 var(--sp-4);
+  }
+  .tabs button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: var(--sp-3) 0;
+    font-size: var(--fs-base);
+    font-weight: 600;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+  .tabs button.active {
+    color: var(--text);
+    border-bottom-color: var(--brand);
+  }
+</style>
+</head>
+<body>
+<div class="phone-frame">
+  <header class="app-header">
+    <button class="icon-btn" aria-label="Volver" onclick="history.back()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <h1 style="font-size: var(--fs-base);">Perfil</h1>
+    <button class="icon-btn" aria-label="Reportar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="12" r="2"/></svg>
+    </button>
+  </header>
+
+  <div class="profile-cover">
+    <div class="avatar xl" style="margin: 0 auto var(--sp-3);">DL</div>
+    <h2 style="margin: 0 0 4px; font-size: var(--fs-xl); font-weight: 700; letter-spacing: -0.02em;">Don Luis Vargas</h2>
+    <div class="text-muted" style="font-size: var(--fs-base);">Chacra Don Luis · Vicuña</div>
+    <div class="row gap-3 mt-3" style="justify-content: center;">
+      <span class="row" style="gap:4px;">
+        <div class="stars lg">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+        </div>
+        <strong>4.9</strong>
+      </span>
+      <span class="text-muted">·</span>
+      <span class="text-muted">24 valoraciones</span>
+    </div>
+    <a href="chat-thread.html" class="btn btn-primary mt-4" style="max-width: 280px; margin-left: auto; margin-right: auto;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4a8 8 0 1 1 16-4z"/></svg>
+      Enviar mensaje
+    </a>
+  </div>
+
+  <main class="content" style="padding-top: 0;">
+    <div class="tabs mt-3">
+      <button class="active">Productos (8)</button>
+      <button>Valoraciones (24)</button>
+    </div>
+
+    <div class="grid-2 mt-4">
+      <article class="product-card">
+        <div class="thumb">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 0 2 .8 2 2-.5 0-1 .3-1.3.8C13.6 5 14 6 14 6.5c.5-1 1.5-1.5 2.5-1.5 2 0 4 1.8 4 4.5 0 5-4 11-8.5 11S3.5 14.5 3.5 9.5C3.5 6.8 5.5 5 7.5 5c1 0 2 .5 2.5 1.5 0-.5.4-1.5 1.3-1.7C11 4.3 10.5 4 10 4c0-1.2 1-2 2-2z"/></svg>
+        </div>
+        <div class="body">
+          <h3 class="title">Tomate orgánico</h3>
+          <div class="price">$1.300 <small>/kg desde 30kg</small></div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="thumb">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 0 2 .8 2 2-.5 0-1 .3-1.3.8C13.6 5 14 6 14 6.5c.5-1 1.5-1.5 2.5-1.5 2 0 4 1.8 4 4.5 0 5-4 11-8.5 11S3.5 14.5 3.5 9.5C3.5 6.8 5.5 5 7.5 5c1 0 2 .5 2.5 1.5 0-.5.4-1.5 1.3-1.7C11 4.3 10.5 4 10 4c0-1.2 1-2 2-2z" opacity=".6"/></svg>
+        </div>
+        <div class="body">
+          <h3 class="title">Tomate cherry</h3>
+          <div class="price">$1.800 <small>/kg</small></div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="thumb">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4 0 8 3 8 8 0 5-4 9-8 11-4-2-8-6-8-11 0-5 4-8 8-8z" opacity=".25"/><path d="M12 4c3 0 7 2 7 7 0 4-3 8-7 9.5C8 19 5 15 5 11c0-5 4-7 7-7z"/></svg>
+        </div>
+        <div class="body">
+          <h3 class="title">Lechuga del valle</h3>
+          <div class="price">$700 <small>/unidad</small></div>
+        </div>
+      </article>
+      <article class="product-card">
+        <div class="thumb">
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" opacity=".4"/><path d="M12 4c4 0 7 3 7 7"/></svg>
+        </div>
+        <div class="body">
+          <h3 class="title">Uva negra</h3>
+          <div class="price">$1.900 <small>/kg</small></div>
+        </div>
+      </article>
+    </div>
+
+    <h2 class="section-title">Valoraciones recientes</h2>
+
+    <div class="review">
+      <div class="row between">
+        <div class="row gap-2">
+          <div class="avatar" style="background: var(--info-soft); color: var(--info);">RM</div>
+          <div>
+            <div class="fw-semi" style="font-size: var(--fs-sm);">Restaurant La Marina</div>
+            <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg></div>
+          </div>
+        </div>
+        <span class="text-muted" style="font-size: var(--fs-xs);">hace 2 días</span>
+      </div>
+      <p style="margin: var(--sp-2) 0 0; color: var(--text); font-size: var(--fs-sm); line-height: 1.5;">
+        "Tomate de muy buena calidad y precio justo. Don Luis cumple con lo acordado, llegamos rápido al punto de entrega."
+      </p>
+    </div>
+
+    <div class="review">
+      <div class="row between">
+        <div class="row gap-2">
+          <div class="avatar" style="background: var(--sun-soft); color: var(--warn);">MV</div>
+          <div>
+            <div class="fw-semi" style="font-size: var(--fs-sm);">Marcela Villarroel</div>
+            <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg></div>
+          </div>
+        </div>
+        <span class="text-muted" style="font-size: var(--fs-xs);">hace 1 sem</span>
+      </div>
+      <p style="margin: var(--sp-2) 0 0; color: var(--text); font-size: var(--fs-sm); line-height: 1.5;">
+        "Perfecto. Lechuga muy fresca."
+      </p>
+    </div>
+
+    <div class="review">
+      <div class="row between">
+        <div class="row gap-2">
+          <div class="avatar">JP</div>
+          <div>
+            <div class="fw-semi" style="font-size: var(--fs-sm);">Juan Pérez</div>
+            <div class="stars">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--border);"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+            </div>
+          </div>
+        </div>
+        <span class="text-muted" style="font-size: var(--fs-xs);">hace 2 sem</span>
+      </div>
+      <p style="margin: var(--sp-2) 0 0; color: var(--text); font-size: var(--fs-sm); line-height: 1.5;">
+        "Buena uva. Demoró un día más en entregar pero todo bien."
+      </p>
+    </div>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Entrar — Punto de Venta Agricultura</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .auth-tabs { display: flex; background: var(--border-soft); border-radius: var(--r-md); padding: 4px; margin-bottom: var(--sp-6); }
+  .auth-tabs button {
+    flex: 1; height: 44px; border: none; background: transparent;
+    border-radius: 10px; font-weight: 600; font-size: var(--fs-sm);
+    color: var(--text-muted); cursor: pointer;
+  }
+  .auth-tabs button.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
+  .google-btn {
+    width: 100%; height: 56px;
+    border: 1.5px solid var(--border); background: var(--surface);
+    border-radius: var(--r-lg); display: flex; align-items: center; justify-content: center;
+    gap: 12px; font-weight: 600; font-size: var(--fs-base); color: var(--text);
+  }
+  .google-btn:hover { background: var(--bg); }
+  .or { display: flex; align-items: center; gap: var(--sp-3); margin: var(--sp-5) 0; color: var(--text-muted); font-size: var(--fs-sm); }
+  .or::before, .or::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .terms { font-size: var(--fs-xs); color: var(--text-muted); text-align: center; margin-top: var(--sp-6); }
+  .terms a { text-decoration: underline; }
+  .otp-row { display: flex; gap: 8px; justify-content: space-between; }
+  .otp-row input {
+    width: 44px; height: 56px;
+    border: 1.5px solid var(--border); border-radius: var(--r-md);
+    text-align: center; font-size: var(--fs-xl); font-weight: 700; font-family: inherit;
+  }
+  .otp-row input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-soft); }
+</style>
+</head>
+<body>
+<div class="phone-frame">
+  <header class="app-header">
+    <button class="icon-btn" aria-label="Volver" onclick="history.back()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <h1>Entrar</h1>
+    <span style="width: 44px;"></span>
+  </header>
+
+  <main class="content">
+    <div style="text-align: center; margin: var(--sp-6) 0 var(--sp-8);">
+      <div style="display: inline-flex; width: 72px; height: 72px; background: var(--brand-soft); color: var(--brand); border-radius: 50%; align-items: center; justify-content: center; margin-bottom: var(--sp-4);">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1.5 3 4 5 7 5-3 0-5 2-5 5 0 3 2 5 5 5-3 0-5 2-5 5"/><path d="M12 22c-1.5-3-4-5-7-5 3 0 5-2 5-5 0-3-2-5-5-5 3 0 5-2 5-5"/></svg>
+      </div>
+      <h2 style="margin: 0 0 var(--sp-2); font-size: var(--fs-xl); font-weight: 700; letter-spacing: -0.02em;">Bienvenido</h2>
+      <p style="margin: 0; color: var(--text-soft); font-size: var(--fs-base);">Entra a Tierra para comprar o vender.</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="active">Teléfono</button>
+      <button>Google</button>
+    </div>
+
+    <div class="field">
+      <label for="phone">Tu número de celular</label>
+      <div class="row gap-2" style="display: flex;">
+        <select class="select" style="width: 96px; flex-shrink: 0;">
+          <option>+56</option>
+          <option>+54</option>
+        </select>
+        <input id="phone" class="input flex-1" type="tel" inputmode="numeric" placeholder="9 1234 5678" />
+      </div>
+      <div class="field-hint">Te enviamos un código por SMS.</div>
+    </div>
+
+    <button class="btn btn-primary mt-4">Enviar código</button>
+
+    <div class="or">o</div>
+
+    <button class="google-btn">
+      <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continuar con Google
+    </button>
+
+    <p class="terms">
+      Al entrar aceptas nuestros <a href="#">Términos</a> y <a href="#">Política de privacidad</a>.<br/>
+      <strong>La plataforma no procesa pagos ni gestiona logística.</strong>
+    </p>
+  </main>
+</div>
+</body>
+</html>

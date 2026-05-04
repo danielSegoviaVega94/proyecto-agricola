@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Chat — Punto de Venta Agricultura</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .chat-product {
+    display: flex; gap: var(--sp-3); align-items: center;
+    padding: var(--sp-3) var(--sp-4);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-soft);
+    text-decoration: none; color: inherit;
+  }
+  .chat-product .thumb-sm {
+    width: 48px; height: 48px; border-radius: var(--r-md);
+    background: linear-gradient(135deg, var(--brand-soft), var(--bg));
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand); flex-shrink: 0;
+  }
+  .day-divider {
+    text-align: center;
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    margin: var(--sp-3) 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .quick-actions {
+    display: flex; gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-4);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .quick-actions::-webkit-scrollbar { display: none; }
+  .quick-actions button {
+    flex-shrink: 0;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    border-radius: var(--r-pill);
+    padding: 8px 14px;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .close-deal-banner {
+    background: var(--brand-soft);
+    padding: var(--sp-3) var(--sp-4);
+    border-bottom: 1px solid #C8E5D2;
+    display: flex; gap: var(--sp-3); align-items: center;
+  }
+  .close-deal-banner .text { flex: 1; font-size: var(--fs-sm); color: var(--brand-strong); }
+  .read-tick { color: var(--brand); }
+</style>
+</head>
+<body>
+<div class="phone-frame">
+  <header class="app-header">
+    <button class="icon-btn" aria-label="Volver" onclick="history.back()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <div class="row gap-2 flex-1" style="min-width: 0;">
+      <div class="avatar">RM</div>
+      <div style="min-width: 0;">
+        <div class="fw-semi" style="font-size: var(--fs-base); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Restaurant La Marina</div>
+        <div class="text-muted" style="font-size: var(--fs-xs);">Activo ahora</div>
+      </div>
+    </div>
+    <button class="icon-btn" aria-label="Reportar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="12" r="2"/></svg>
+    </button>
+  </header>
+
+  <a href="product.html" class="chat-product">
+    <div class="thumb-sm">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 0 2 .8 2 2-.5 0-1 .3-1.3.8C13.6 5 14 6 14 6.5c.5-1 1.5-1.5 2.5-1.5 2 0 4 1.8 4 4.5 0 5-4 11-8.5 11S3.5 14.5 3.5 9.5C3.5 6.8 5.5 5 7.5 5c1 0 2 .5 2.5 1.5 0-.5.4-1.5 1.3-1.7C11 4.3 10.5 4 10 4c0-1.2 1-2 2-2z"/></svg>
+    </div>
+    <div class="flex-1" style="min-width: 0;">
+      <div class="fw-semi" style="font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Tomate orgánico recién cosechado</div>
+      <div class="text-muted" style="font-size: var(--fs-xs);">desde $1.300/kg</div>
+    </div>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color: var(--text-muted);"><path d="m9 18 6-6-6-6"/></svg>
+  </a>
+
+  <div class="disclaimer">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+    <span>Tierra <strong>no procesa pagos</strong> ni gestiona logística. Acuerden precio final y entrega entre ustedes.</span>
+  </div>
+
+  <div class="chat-list" style="padding-bottom: 180px;">
+    <div class="day-divider">Hoy</div>
+
+    <div class="bubble them">
+      Hola Don Luis, soy Sebastián del Restaurant La Marina. Vi su tomate orgánico.
+      <span class="ts">10:12</span>
+    </div>
+
+    <div class="bubble them">
+      ¿Tiene disponible 50kg para el viernes?
+      <span class="ts">10:12</span>
+    </div>
+
+    <div class="bubble me">
+      Hola Sebastián, sí tengo disponible. A 50kg sale a $1.300 el kilo.
+      <span class="ts">10:18 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="read-tick"><path d="m5 12 5 5L20 7"/></svg></span>
+    </div>
+
+    <div class="bubble me">
+      ¿Lo pasa a buscar a la chacra o coordinamos punto en La Serena?
+      <span class="ts">10:19 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="read-tick"><path d="m5 12 5 5L20 7"/></svg></span>
+    </div>
+
+    <div class="bubble them">
+      Perfecto. Mejor punto en La Serena, ¿le acomoda el centro a las 11?
+      <span class="ts">10:24</span>
+    </div>
+  </div>
+
+  <div class="quick-actions" style="position: fixed; bottom: 76px; left: 0; right: 0; background: var(--bg);">
+    <button>Cerrar trato</button>
+    <button>Compartir ubicación</button>
+    <button>Reportar usuario</button>
+  </div>
+
+  <div class="chat-composer">
+    <textarea placeholder="Escribir mensaje..." rows="1"></textarea>
+    <button class="send-btn" aria-label="Enviar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 14-7-7 14-2-5-5-2z"/></svg>
+    </button>
+  </div>
+</div>
+</body>
+</html>
