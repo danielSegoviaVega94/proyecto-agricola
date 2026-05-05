@@ -1,7 +1,7 @@
 # PROJECT_STATUS.md — Punto de Venta Agricultura
 
 Fecha de actualización: 2026-05-05  
-Estado general: avance hasta **Paso 11** del Build Order del blueprint.
+Estado general: avance hasta **Paso 12** del Build Order del blueprint.
 
 ## 1) Estado por paso (Blueprint §17)
 
@@ -18,7 +18,8 @@ Estado general: avance hasta **Paso 11** del Build Order del blueprint.
 | 8 Conversaciones | ✅ | `feat/step-8-conversations` / `26229ac` | `openConversation`, `/chat`, `/chat/[id]`, realtime + trigger SQL |
 | 9 Cierre + Valoración | ✅ | `feat/step-9-ratings` / `6449ba5` | cerrar trato, `RatingForm`, `RatingStars`, perfil con resumen de valoraciones |
 | 10 Reportes | ✅ | `feat/step-10-reports` / `0e49359` | `ReportButton`, `submitReport`, tests unit + RLS |
-| 11 Panel Admin | ✅ | `feat/step-11-admin` / `HEAD de la rama` | guard admin, `/admin/*`, suspensión/reactivación y bloqueo a usuarios suspendidos |
+| 11 Panel Admin | ✅ | `feat/step-11-admin` / `9a454c9` | guard admin, `/admin/*`, suspensión/reactivación y bloqueo a usuarios suspendidos |
+| 12 PWA | ✅ | `feat/step-12-pwa` / `HEAD de la rama` | `manifest`, iconos 192/512, `next-pwa`, `sw.js` generado en build |
 
 ## 2) Ramas activas relevantes
 
@@ -32,7 +33,8 @@ Estado general: avance hasta **Paso 11** del Build Order del blueprint.
 - `feat/step-8-conversations`
 - `feat/step-9-ratings`
 - `feat/step-10-reports`
-- `feat/step-11-admin` (rama actual)
+- `feat/step-11-admin`
+- `feat/step-12-pwa` (rama actual)
 
 ## 3) Archivos clave agregados por funcionalidad
 
@@ -85,6 +87,12 @@ Estado general: avance hasta **Paso 11** del Build Order del blueprint.
   - `app/admin/reportes/page.tsx`
   - `app/admin/usuarios/page.tsx`
   - `tests/admin/{require-admin-user,suspend-user}.test.ts`
+- PWA:
+  - `app/manifest.ts`
+  - `next.config.ts`
+  - `public/icon-192.png`
+  - `public/icon-512.png`
+  - `tests/pwa/{manifest,icons}.test.ts`
 
 ## 4) Cobertura de tests actual
 
@@ -99,6 +107,7 @@ Estado general: avance hasta **Paso 11** del Build Order del blueprint.
   - Cierre + valoración: cierre de trato, rating duplicado, `RatingStars`, RLS inmutable
   - Reportes: creación `pending` y RLS de lectura `reporter/admin`
   - Admin: guard server-side, suspensión de usuarios, bloqueo por `is_suspended`
+  - PWA: manifest installable, iconos presentes y build con service worker generado
 - E2E (Playwright):
   - Login fallback con `signInWithOtp` (email mock para CI)
   - Navegación landing → catálogo → detalle de producto
@@ -127,12 +136,11 @@ pnpm test:e2e
 
 ## 7) Definición de “dónde continuar”
 
-Continuar en **Paso 12 — PWA** del blueprint:
+Continuar en **Paso 13 — Deploy a Vercel** del blueprint:
 
-1. Configurar PWA compatible con App Router.
-2. `manifest.json` e iconos 192/512.
-3. Estrategia básica de service worker.
-4. Validación de instalación y score PWA.
+1. Conectar repo a Vercel.
+2. Cargar variables de entorno.
+3. Verificar smoke de producción.
 
 ## 8) Reglas de continuidad para otras IA
 

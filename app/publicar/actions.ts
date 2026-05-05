@@ -2,20 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 
+import type { CreateProductState } from "@/app/publicar/state";
 import { createProductSchema } from "@/lib/products/product-schema";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-
-export type CreateProductState = {
-  status: "idle" | "success" | "error";
-  message: string;
-  redirectTo: string | null;
-};
-
-export const initialCreateProductState: CreateProductState = {
-  status: "idle",
-  message: "",
-  redirectTo: null,
-};
 
 function parseCreateProductFormData(formData: FormData) {
   const tierMinValues = formData.getAll("tier_min_quantity");

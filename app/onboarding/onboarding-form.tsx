@@ -3,7 +3,7 @@
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import type { OnboardingActionState } from "@/app/onboarding/actions";
+import type { OnboardingActionState } from "@/app/onboarding/state";
 
 type OnboardingFormProps = {
   state: OnboardingActionState;

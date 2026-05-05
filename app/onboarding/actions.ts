@@ -2,19 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 
+import type { OnboardingActionState } from "@/app/onboarding/state";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-
-export type OnboardingActionState = {
-  status: "idle" | "success" | "error";
-  message: string;
-  redirectTo: string | null;
-};
-
-export const initialOnboardingState: OnboardingActionState = {
-  status: "idle",
-  message: "",
-  redirectTo: null,
-};
 
 export async function completeOnboarding(
   _prevState: OnboardingActionState,

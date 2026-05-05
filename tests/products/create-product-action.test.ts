@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { createProduct, initialCreateProductState } from "@/app/publicar/actions";
+import { createProduct } from "@/app/publicar/actions";
+import { initialCreateProductState } from "@/app/publicar/state";
 
 const {
   createServerSupabaseClientMock,

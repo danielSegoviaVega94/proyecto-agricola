@@ -2,10 +2,8 @@
 
 import { useActionState, useState } from "react";
 
-import {
-  initialSubmitReportState,
-  type SubmitReportState,
-} from "@/app/chat/actions";
+import type { SubmitReportState } from "@/app/chat/state";
+import { initialSubmitReportState } from "@/app/chat/state";
 
 type ReportButtonProps = {
   action: (

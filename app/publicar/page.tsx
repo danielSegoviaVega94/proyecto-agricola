@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
 
-import { createProduct, initialCreateProductState } from "@/app/publicar/actions";
+import { createProduct } from "@/app/publicar/actions";
 import { PublishProductForm } from "@/app/publicar/publish-product-form";
+import { initialCreateProductState } from "@/app/publicar/state";
 import { getCategoryTree } from "@/lib/categories/get-category-tree";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 

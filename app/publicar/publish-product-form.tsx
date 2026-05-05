@@ -8,7 +8,7 @@ import { z } from "zod";
 
 import type { CategoryTreeNode } from "@/lib/categories/get-category-tree";
 import { createProductSchema } from "@/lib/products/product-schema";
-import type { CreateProductState } from "@/app/publicar/actions";
+import type { CreateProductState } from "@/app/publicar/state";
 import { CategoryPicker } from "@/components/category-picker";
 import { PriceTierEditor } from "@/components/products/price-tier-editor";
 import { ProductImageUploader } from "@/components/products/product-image-uploader";

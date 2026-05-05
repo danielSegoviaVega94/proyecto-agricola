@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
+import type { SubmitRatingState, SubmitReportState } from "@/app/chat/state";
 import { demoProducts } from "@/lib/products/demo-data";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
@@ -15,26 +16,6 @@ export type OpenConversationResult = {
 export type ConversationActionResult = {
   status: "success" | "error";
   message: string;
-};
-
-export type SubmitRatingState = {
-  status: "idle" | "success" | "error";
-  message: string;
-};
-
-export type SubmitReportState = {
-  status: "idle" | "success" | "error";
-  message: string;
-};
-
-export const initialSubmitRatingState: SubmitRatingState = {
-  status: "idle",
-  message: "",
-};
-
-export const initialSubmitReportState: SubmitReportState = {
-  status: "idle",
-  message: "",
 };
 
 export async function openConversation(productId: string): Promise<OpenConversationResult> {

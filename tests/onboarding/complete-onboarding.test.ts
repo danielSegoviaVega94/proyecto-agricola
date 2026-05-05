@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { completeOnboarding, initialOnboardingState } from "@/app/onboarding/actions";
+import { completeOnboarding } from "@/app/onboarding/actions";
+import { initialOnboardingState } from "@/app/onboarding/state";
 
 const { revalidatePathMock, getUserMock, upsertMock, createServerSupabaseClientMock } = vi.hoisted(
   () => ({

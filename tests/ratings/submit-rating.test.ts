@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { initialSubmitRatingState, submitRating } from "@/app/chat/actions";
+import { submitRating } from "@/app/chat/actions";
+import { initialSubmitRatingState } from "@/app/chat/state";
 
 const {
   createServerSupabaseClientMock,

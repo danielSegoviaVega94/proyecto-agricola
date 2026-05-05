@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
-import { completeOnboarding, initialOnboardingState } from "@/app/onboarding/actions";
+import { completeOnboarding } from "@/app/onboarding/actions";
+import { initialOnboardingState } from "@/app/onboarding/state";
 import { OnboardingForm } from "@/app/onboarding/onboarding-form";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 

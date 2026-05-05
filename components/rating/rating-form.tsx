@@ -2,10 +2,8 @@
 
 import { useActionState } from "react";
 
-import {
-  initialSubmitRatingState,
-  type SubmitRatingState,
-} from "@/app/chat/actions";
+import type { SubmitRatingState } from "@/app/chat/state";
+import { initialSubmitRatingState } from "@/app/chat/state";
 
 type RatingFormProps = {
   action: (
