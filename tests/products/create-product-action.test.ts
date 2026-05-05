@@ -5,6 +5,7 @@ import { createProduct, initialCreateProductState } from "@/app/publicar/actions
 const {
   createServerSupabaseClientMock,
   getUserMock,
+  maybeSingleUserMock,
   insertProductMock,
   insertTierMock,
   insertImageMock,
@@ -14,6 +15,7 @@ const {
 } = vi.hoisted(() => ({
   createServerSupabaseClientMock: vi.fn(),
   getUserMock: vi.fn(),
+  maybeSingleUserMock: vi.fn(),
   insertProductMock: vi.fn(),
   insertTierMock: vi.fn(),
   insertImageMock: vi.fn(),
@@ -34,6 +36,7 @@ describe("createProduct action", () => {
   beforeEach(() => {
     createServerSupabaseClientMock.mockReset();
     getUserMock.mockReset();
+    maybeSingleUserMock.mockReset();
     insertProductMock.mockReset();
     insertTierMock.mockReset();
     insertImageMock.mockReset();
@@ -64,6 +67,16 @@ describe("createProduct action", () => {
     createServerSupabaseClientMock.mockResolvedValue({
       auth: { getUser: getUserMock },
       from: vi.fn((table: string) => {
+        if (table === "users") {
+          return {
+            select: vi.fn(() => ({
+              eq: vi.fn(() => ({
+                maybeSingle: maybeSingleUserMock,
+              })),
+            })),
+          };
+        }
+
         if (table === "products") {
           return { insert: insertProductMock };
         }
@@ -78,6 +91,10 @@ describe("createProduct action", () => {
 
         throw new Error(`Unexpected table ${table}`);
       }),
+    });
+    maybeSingleUserMock.mockResolvedValue({
+      data: { id: "11111111-1111-1111-1111-111111111111", is_suspended: false },
+      error: null,
     });
 
     const formData = new FormData();
@@ -100,5 +117,58 @@ describe("createProduct action", () => {
     expect(insertTierMock).toHaveBeenCalled();
     expect(insertImageMock).toHaveBeenCalled();
     expect(revalidatePathMock).toHaveBeenCalledWith("/perfil/11111111-1111-1111-1111-111111111111");
+  });
+
+  it("rejects suspended users before creating the product", async () => {
+    getUserMock.mockResolvedValue({
+      data: {
+        user: {
+          id: "11111111-1111-1111-1111-111111111111",
+        },
+      },
+      error: null,
+    });
+
+    maybeSingleUserMock.mockResolvedValue({
+      data: { id: "11111111-1111-1111-1111-111111111111", is_suspended: true },
+      error: null,
+    });
+
+    createServerSupabaseClientMock.mockResolvedValue({
+      auth: { getUser: getUserMock },
+      from: vi.fn((table: string) => {
+        if (table === "users") {
+          return {
+            select: vi.fn(() => ({
+              eq: vi.fn(() => ({
+                maybeSingle: maybeSingleUserMock,
+              })),
+            })),
+          };
+        }
+
+        if (table === "products") {
+          return { insert: insertProductMock };
+        }
+
+        throw new Error(`Unexpected table ${table}`);
+      }),
+    });
+
+    const formData = new FormData();
+    formData.set("title", "Tomate orgánico");
+    formData.set("description", "Tomate de Vicuña");
+    formData.set("categoryId", "20000000-0000-0000-0000-000000000001");
+    formData.set("measureUnit", "kg");
+    formData.set("stock", "50");
+    formData.set("comuna", "Vicuña");
+    formData.append("tier_min_quantity", "0");
+    formData.append("tier_price_per_unit", "1500");
+
+    const result = await createProduct(initialCreateProductState, formData);
+
+    expect(result.status).toBe("error");
+    expect(result.message).toContain("suspendida");
+    expect(insertProductMock).not.toHaveBeenCalled();
   });
 });

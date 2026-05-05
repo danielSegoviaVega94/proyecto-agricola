@@ -61,6 +61,20 @@ export async function createProduct(
     };
   }
 
+  const { data: profile } = await supabase
+    .from("users")
+    .select("id, is_suspended")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (profile?.is_suspended) {
+    return {
+      status: "error",
+      message: "Tu cuenta está suspendida y no puede publicar nuevos productos.",
+      redirectTo: null,
+    };
+  }
+
   const parsed = createProductSchema.safeParse(parseCreateProductFormData(formData));
   if (!parsed.success) {
     return {

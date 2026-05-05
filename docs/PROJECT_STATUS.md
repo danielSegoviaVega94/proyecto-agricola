@@ -1,7 +1,7 @@
 # PROJECT_STATUS.md — Punto de Venta Agricultura
 
 Fecha de actualización: 2026-05-05  
-Estado general: avance hasta **Paso 10** del Build Order del blueprint.
+Estado general: avance hasta **Paso 11** del Build Order del blueprint.
 
 ## 1) Estado por paso (Blueprint §17)
 
@@ -17,7 +17,8 @@ Estado general: avance hasta **Paso 10** del Build Order del blueprint.
 | 7 Catálogo + Detalle | ✅ | `feat/step-7-catalog-detail` / `5ecde09` | `/productos`, `/producto/[id]`, `ProductCard`, filtros + búsqueda |
 | 8 Conversaciones | ✅ | `feat/step-8-conversations` / `26229ac` | `openConversation`, `/chat`, `/chat/[id]`, realtime + trigger SQL |
 | 9 Cierre + Valoración | ✅ | `feat/step-9-ratings` / `6449ba5` | cerrar trato, `RatingForm`, `RatingStars`, perfil con resumen de valoraciones |
-| 10 Reportes | ✅ | `feat/step-10-reports` / `HEAD de la rama` | `ReportButton`, `submitReport`, tests unit + RLS |
+| 10 Reportes | ✅ | `feat/step-10-reports` / `0e49359` | `ReportButton`, `submitReport`, tests unit + RLS |
+| 11 Panel Admin | ✅ | `feat/step-11-admin` / `HEAD de la rama` | guard admin, `/admin/*`, suspensión/reactivación y bloqueo a usuarios suspendidos |
 
 ## 2) Ramas activas relevantes
 
@@ -30,7 +31,8 @@ Estado general: avance hasta **Paso 10** del Build Order del blueprint.
 - `feat/step-7-catalog-detail`
 - `feat/step-8-conversations`
 - `feat/step-9-ratings`
-- `feat/step-10-reports` (rama actual)
+- `feat/step-10-reports`
+- `feat/step-11-admin` (rama actual)
 
 ## 3) Archivos clave agregados por funcionalidad
 
@@ -77,6 +79,12 @@ Estado general: avance hasta **Paso 10** del Build Order del blueprint.
   - `components/chat/report-button.tsx`
   - `tests/reports/submit-report.test.ts`
   - `tests/rls/reports-access-policy.test.ts`
+- Panel admin:
+  - `lib/admin/{require-admin-user,data}.ts`
+  - `app/admin/{layout,page,actions}.ts*`
+  - `app/admin/reportes/page.tsx`
+  - `app/admin/usuarios/page.tsx`
+  - `tests/admin/{require-admin-user,suspend-user}.test.ts`
 
 ## 4) Cobertura de tests actual
 
@@ -90,6 +98,7 @@ Estado general: avance hasta **Paso 10** del Build Order del blueprint.
   - Conversaciones: anti auto-chat, bridge realtime de mensajes, trigger SQL `last_message_at`
   - Cierre + valoración: cierre de trato, rating duplicado, `RatingStars`, RLS inmutable
   - Reportes: creación `pending` y RLS de lectura `reporter/admin`
+  - Admin: guard server-side, suspensión de usuarios, bloqueo por `is_suspended`
 - E2E (Playwright):
   - Login fallback con `signInWithOtp` (email mock para CI)
   - Navegación landing → catálogo → detalle de producto
@@ -118,14 +127,12 @@ pnpm test:e2e
 
 ## 7) Definición de “dónde continuar”
 
-Continuar en **Paso 11 — Panel Admin** del blueprint:
+Continuar en **Paso 12 — PWA** del blueprint:
 
-1. Proteger `/admin/*` con chequeo de `is_admin()`.
-2. `/admin/reportes` con pendientes, vista read-only de conversación y acciones.
-3. `/admin/usuarios` para suspender/reactivar usuarios.
-4. Tests:
-   - E2E: admin suspende usuario y este no puede publicar
-   - RLS: no-admin no ve `/admin/*`
+1. Configurar PWA compatible con App Router.
+2. `manifest.json` e iconos 192/512.
+3. Estrategia básica de service worker.
+4. Validación de instalación y score PWA.
 
 ## 8) Reglas de continuidad para otras IA
 
