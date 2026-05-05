@@ -84,7 +84,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           <p className="text-lg font-bold text-[#115e2c]">${basePrice}/kg</p>
         </div>
         <Link
-          href="/chat"
+          href={`/chat?productId=${product.id}`}
           className="inline-flex h-11 items-center justify-center rounded-xl bg-[#16803c] px-6 text-sm font-semibold text-white"
         >
           Contactar
