@@ -1,7 +1,7 @@
 # PROJECT_STATUS.md — Punto de Venta Agricultura
 
 Fecha de actualización: 2026-05-05  
-Estado general: avance hasta **Paso 9** del Build Order del blueprint.
+Estado general: avance hasta **Paso 10** del Build Order del blueprint.
 
 ## 1) Estado por paso (Blueprint §17)
 
@@ -16,7 +16,8 @@ Estado general: avance hasta **Paso 9** del Build Order del blueprint.
 | 6 Publicar producto | ✅ | `feat/step-6-products` / `f40a994` | `/publicar`, Zod + RHF + tiers + action `createProduct` |
 | 7 Catálogo + Detalle | ✅ | `feat/step-7-catalog-detail` / `5ecde09` | `/productos`, `/producto/[id]`, `ProductCard`, filtros + búsqueda |
 | 8 Conversaciones | ✅ | `feat/step-8-conversations` / `26229ac` | `openConversation`, `/chat`, `/chat/[id]`, realtime + trigger SQL |
-| 9 Cierre + Valoración | ✅ | `feat/step-9-ratings` / `HEAD de la rama` | cerrar trato, `RatingForm`, `RatingStars`, perfil con resumen de valoraciones |
+| 9 Cierre + Valoración | ✅ | `feat/step-9-ratings` / `6449ba5` | cerrar trato, `RatingForm`, `RatingStars`, perfil con resumen de valoraciones |
+| 10 Reportes | ✅ | `feat/step-10-reports` / `HEAD de la rama` | `ReportButton`, `submitReport`, tests unit + RLS |
 
 ## 2) Ramas activas relevantes
 
@@ -28,7 +29,8 @@ Estado general: avance hasta **Paso 9** del Build Order del blueprint.
 - `feat/step-6-products`
 - `feat/step-7-catalog-detail`
 - `feat/step-8-conversations`
-- `feat/step-9-ratings` (rama actual)
+- `feat/step-9-ratings`
+- `feat/step-10-reports` (rama actual)
 
 ## 3) Archivos clave agregados por funcionalidad
 
@@ -71,6 +73,10 @@ Estado general: avance hasta **Paso 9** del Build Order del blueprint.
   - `components/rating/rating-form.tsx`
   - `tests/ratings/{rating-stars,submit-rating}.test.ts*`
   - `tests/chat/close-conversation.test.ts`
+- Reportes:
+  - `components/chat/report-button.tsx`
+  - `tests/reports/submit-report.test.ts`
+  - `tests/rls/reports-access-policy.test.ts`
 
 ## 4) Cobertura de tests actual
 
@@ -83,6 +89,7 @@ Estado general: avance hasta **Paso 9** del Build Order del blueprint.
   - Policy assertions en SQL de migración
   - Conversaciones: anti auto-chat, bridge realtime de mensajes, trigger SQL `last_message_at`
   - Cierre + valoración: cierre de trato, rating duplicado, `RatingStars`, RLS inmutable
+  - Reportes: creación `pending` y RLS de lectura `reporter/admin`
 - E2E (Playwright):
   - Login fallback con `signInWithOtp` (email mock para CI)
   - Navegación landing → catálogo → detalle de producto
@@ -111,13 +118,14 @@ pnpm test:e2e
 
 ## 7) Definición de “dónde continuar”
 
-Continuar en **Paso 10 — Reportes** del blueprint:
+Continuar en **Paso 11 — Panel Admin** del blueprint:
 
-1. `ReportButton` en `/chat/[id]`.
-2. Server action `submitReport`.
-3. Tests:
-   - unit del envío
-   - RLS: reportante o admin pueden ver el reporte
+1. Proteger `/admin/*` con chequeo de `is_admin()`.
+2. `/admin/reportes` con pendientes, vista read-only de conversación y acciones.
+3. `/admin/usuarios` para suspender/reactivar usuarios.
+4. Tests:
+   - E2E: admin suspende usuario y este no puede publicar
+   - RLS: no-admin no ve `/admin/*`
 
 ## 8) Reglas de continuidad para otras IA
 

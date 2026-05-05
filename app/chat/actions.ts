@@ -22,7 +22,17 @@ export type SubmitRatingState = {
   message: string;
 };
 
+export type SubmitReportState = {
+  status: "idle" | "success" | "error";
+  message: string;
+};
+
 export const initialSubmitRatingState: SubmitRatingState = {
+  status: "idle",
+  message: "",
+};
+
+export const initialSubmitReportState: SubmitReportState = {
   status: "idle",
   message: "",
 };
@@ -285,5 +295,81 @@ export async function submitRating(
   return {
     status: "success",
     message: "Valoración enviada correctamente.",
+  };
+}
+
+export async function submitReport(
+  _prevState: SubmitReportState,
+  formData: FormData,
+): Promise<SubmitReportState> {
+  const conversationId = String(formData.get("conversationId") ?? "").trim();
+  const reason = String(formData.get("reason") ?? "").trim();
+
+  if (!conversationId || reason.length < 5) {
+    return {
+      status: "error",
+      message: "Describe el motivo del reporte.",
+    };
+  }
+
+  const supabase = await createServerSupabaseClient();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    return {
+      status: "error",
+      message: "Debes iniciar sesión para reportar.",
+    };
+  }
+
+  const { data: conversation, error: conversationError } = await supabase
+    .from("conversations")
+    .select("id, buyer_id, seller_id")
+    .eq("id", conversationId)
+    .maybeSingle();
+
+  if (conversationError || !conversation) {
+    return {
+      status: "error",
+      message: "No encontramos la conversación a reportar.",
+    };
+  }
+
+  const isParticipant =
+    conversation.buyer_id === user.id || conversation.seller_id === user.id;
+
+  if (!isParticipant) {
+    return {
+      status: "error",
+      message: "No puedes reportar esta conversación.",
+    };
+  }
+
+  const reportedId =
+    conversation.buyer_id === user.id ? conversation.seller_id : conversation.buyer_id;
+
+  const { error: insertError } = await supabase.from("reports").insert({
+    reporter_id: user.id,
+    reported_id: reportedId,
+    conversation_id: conversationId,
+    reason,
+    status: "pending",
+  });
+
+  if (insertError) {
+    return {
+      status: "error",
+      message: "No fue posible guardar el reporte.",
+    };
+  }
+
+  revalidatePath(`/chat/${conversationId}`);
+
+  return {
+    status: "success",
+    message: "Reporte enviado. El equipo lo revisará.",
   };
 }

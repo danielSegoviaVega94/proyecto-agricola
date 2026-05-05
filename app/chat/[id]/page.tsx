@@ -3,10 +3,12 @@ import { notFound, redirect } from "next/navigation";
 
 import {
   closeConversation,
+  submitReport,
   submitRating,
 } from "@/app/chat/actions";
 import { ChatThread } from "@/components/chat/chat-thread";
 import { DisclaimerBanner } from "@/components/chat/disclaimer-banner";
+import { ReportButton } from "@/components/chat/report-button";
 import { RatingForm } from "@/components/rating/rating-form";
 import { getConversationThread } from "@/lib/chat/server-data";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
@@ -101,6 +103,14 @@ export default async function ChatThreadPage({ params }: ChatThreadPageProps) {
               />
             )}
           </div>
+        ) : null}
+
+        {!thread.isDemo ? (
+          <ReportButton
+            action={submitReport}
+            conversationId={thread.id}
+            counterpartName={thread.counterpartName}
+          />
         ) : null}
       </main>
     </div>
