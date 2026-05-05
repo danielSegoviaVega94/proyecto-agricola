@@ -1,7 +1,7 @@
 # PROJECT_STATUS.md — Punto de Venta Agricultura
 
 Fecha de actualización: 2026-05-05  
-Estado general: avance hasta **Paso 8** del Build Order del blueprint.
+Estado general: avance hasta **Paso 9** del Build Order del blueprint.
 
 ## 1) Estado por paso (Blueprint §17)
 
@@ -15,7 +15,8 @@ Estado general: avance hasta **Paso 8** del Build Order del blueprint.
 | 5 Categorías | ✅ | `feat/step-5-categories` / `920090e` | `getCategoryTree()` + `CategoryPicker` |
 | 6 Publicar producto | ✅ | `feat/step-6-products` / `f40a994` | `/publicar`, Zod + RHF + tiers + action `createProduct` |
 | 7 Catálogo + Detalle | ✅ | `feat/step-7-catalog-detail` / `5ecde09` | `/productos`, `/producto/[id]`, `ProductCard`, filtros + búsqueda |
-| 8 Conversaciones | ✅ | `feat/step-8-conversations` / `HEAD de la rama` | `openConversation`, `/chat`, `/chat/[id]`, realtime + trigger SQL |
+| 8 Conversaciones | ✅ | `feat/step-8-conversations` / `26229ac` | `openConversation`, `/chat`, `/chat/[id]`, realtime + trigger SQL |
+| 9 Cierre + Valoración | ✅ | `feat/step-9-ratings` / `HEAD de la rama` | cerrar trato, `RatingForm`, `RatingStars`, perfil con resumen de valoraciones |
 
 ## 2) Ramas activas relevantes
 
@@ -26,7 +27,8 @@ Estado general: avance hasta **Paso 8** del Build Order del blueprint.
 - `feat/step-5-categories`
 - `feat/step-6-products`
 - `feat/step-7-catalog-detail`
-- `feat/step-8-conversations` (rama actual)
+- `feat/step-8-conversations`
+- `feat/step-9-ratings` (rama actual)
 
 ## 3) Archivos clave agregados por funcionalidad
 
@@ -64,6 +66,11 @@ Estado general: avance hasta **Paso 8** del Build Order del blueprint.
   - `components/chat/disclaimer-banner.tsx`
   - `lib/chat/{realtime,server-data}.ts`
   - `supabase/migrations/0002_messages_last_message_trigger.sql`
+- Cierre y valoración:
+  - `components/rating/rating-stars.tsx`
+  - `components/rating/rating-form.tsx`
+  - `tests/ratings/{rating-stars,submit-rating}.test.ts*`
+  - `tests/chat/close-conversation.test.ts`
 
 ## 4) Cobertura de tests actual
 
@@ -75,6 +82,7 @@ Estado general: avance hasta **Paso 8** del Build Order del blueprint.
   - Schema validation de tramos de precio
   - Policy assertions en SQL de migración
   - Conversaciones: anti auto-chat, bridge realtime de mensajes, trigger SQL `last_message_at`
+  - Cierre + valoración: cierre de trato, rating duplicado, `RatingStars`, RLS inmutable
 - E2E (Playwright):
   - Login fallback con `signInWithOtp` (email mock para CI)
   - Navegación landing → catálogo → detalle de producto
@@ -98,15 +106,13 @@ pnpm test:e2e
 
 ## 7) Definición de “dónde continuar”
 
-Continuar en **Paso 9 — Cierre + Valoración** del blueprint:
+Continuar en **Paso 10 — Reportes** del blueprint:
 
-1. Botón "Cerrar trato" en `/chat/[id]` y cambio de estado a `conversations.status='closed'`.
-2. Formulario de valoración bidireccional tras cierre.
-3. Integración de `user_ratings_summary` en perfil y tarjetas de producto.
-4. Tests:
-   - unit: rating duplicado falla (`unique(rater_id, conversation_id)`)
-   - RLS: rating inmutable
-   - component: render correcto de estrellas
+1. `ReportButton` en `/chat/[id]`.
+2. Server action `submitReport`.
+3. Tests:
+   - unit del envío
+   - RLS: reportante o admin pueden ver el reporte
 
 ## 8) Reglas de continuidad para otras IA
 

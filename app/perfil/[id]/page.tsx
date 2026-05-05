@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { RatingStars } from "@/components/rating/rating-stars";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 type ProfilePageProps = {
@@ -20,7 +21,15 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
     notFound();
   }
 
+  const { data: ratingsSummary } = await supabase
+    .from("user_ratings_summary")
+    .select("average_score, total_ratings")
+    .eq("user_id", id)
+    .maybeSingle();
+
   const avatarLabel = profile.full_name.slice(0, 1).toUpperCase();
+  const averageScore = Number(ratingsSummary?.average_score ?? 0);
+  const totalRatings = Number(ratingsSummary?.total_ratings ?? 0);
 
   return (
     <div className="min-h-screen bg-[#fafaf7]">
@@ -32,6 +41,18 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           <h1 className="text-2xl font-bold tracking-tight text-[#0f0f0f]">{profile.full_name}</h1>
           {profile.business_name ? <p className="mt-1 text-base text-[#4a4a4a]">{profile.business_name}</p> : null}
           <p className="mt-1 text-sm text-[#8a8a8a]">{profile.comuna}</p>
+          <div className="mt-4 rounded-xl bg-[#fafaf7] px-3 py-3">
+            <p className="text-xs font-medium text-[#8a8a8a]">Valoración</p>
+            <div className="mt-2 flex items-center gap-2">
+              <RatingStars value={averageScore} />
+              <span className="text-sm font-semibold text-[#0f0f0f]">
+                {averageScore.toFixed(1)}
+              </span>
+              <span className="text-xs text-[#8a8a8a]">
+                ({totalRatings} {totalRatings === 1 ? "valoración" : "valoraciones"})
+              </span>
+            </div>
+          </div>
           {profile.avatar_url ? (
             <a
               href={profile.avatar_url}

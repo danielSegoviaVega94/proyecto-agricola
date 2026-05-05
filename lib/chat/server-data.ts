@@ -41,7 +41,9 @@ export type ConversationThread = {
   productTitle: string;
   status: "open" | "closed";
   currentUserId: string;
+  counterpartId: string;
   counterpartName: string;
+  currentUserHasRated: boolean;
   messages: ThreadMessage[];
 };
 
@@ -133,6 +135,8 @@ export async function getConversationThread(conversationId: string, currentUserI
   }
 
   const normalized = normalizeConversationRow(conversation as unknown as ConversationRow, currentUserId);
+  const counterpartId =
+    conversation.buyer_id === currentUserId ? conversation.seller_id : conversation.buyer_id;
 
   const { data: messages, error: messagesError } = await supabase
     .from("messages")
@@ -144,6 +148,14 @@ export async function getConversationThread(conversationId: string, currentUserI
     return null;
   }
 
+  const { data: ratings } = await supabase
+    .from("ratings")
+    .select("id, rater_id")
+    .eq("conversation_id", conversationId);
+
+  const currentUserHasRated =
+    ratings?.some((rating) => rating.rater_id === currentUserId) ?? false;
+
   return {
     id: normalized.id,
     productId: normalized.productId,
@@ -151,6 +163,8 @@ export async function getConversationThread(conversationId: string, currentUserI
     status: normalized.status,
     counterpartName: normalized.counterpartName,
     currentUserId,
+    counterpartId,
+    currentUserHasRated,
     messages: messages.map((message) => ({
       id: message.id,
       senderId: message.sender_id,
