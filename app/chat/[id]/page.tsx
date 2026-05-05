@@ -83,10 +83,11 @@ export default async function ChatThreadPage({ params }: ChatThreadPageProps) {
         <ChatThread
           conversationId={thread.id}
           currentUserId={thread.currentUserId}
+          isDemo={thread.isDemo}
           initialMessages={thread.messages}
         />
 
-        {thread.status === "closed" ? (
+        {thread.status === "closed" && !thread.isDemo ? (
           <div className="mt-4">
             {thread.currentUserHasRated ? (
               <p className="rounded-xl border border-[#e8e6e0] bg-[#fafaf7] px-3 py-3 text-sm text-[#4a4a4a]">

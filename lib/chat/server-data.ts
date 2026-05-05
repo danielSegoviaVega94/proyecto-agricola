@@ -1,4 +1,5 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { demoProducts } from "@/lib/products/demo-data";
 
 type ConversationRow = {
   id: string;
@@ -44,6 +45,7 @@ export type ConversationThread = {
   counterpartId: string;
   counterpartName: string;
   currentUserHasRated: boolean;
+  isDemo: boolean;
   messages: ThreadMessage[];
 };
 
@@ -110,6 +112,41 @@ export async function getConversationInbox(currentUserId: string) {
 }
 
 export async function getConversationThread(conversationId: string, currentUserId: string) {
+  if (conversationId.startsWith("demo-thread-")) {
+    const productId = conversationId.replace("demo-thread-", "");
+    const demoProduct = demoProducts.find((product) => product.id === productId);
+
+    if (!demoProduct) {
+      return null;
+    }
+
+    return {
+      id: conversationId,
+      productId: demoProduct.id,
+      productTitle: demoProduct.title,
+      status: "open",
+      currentUserId,
+      counterpartId: demoProduct.sellerId,
+      counterpartName: demoProduct.sellerBusinessName ?? demoProduct.sellerName,
+      currentUserHasRated: false,
+      isDemo: true,
+      messages: [
+        {
+          id: `${conversationId}-1`,
+          senderId: demoProduct.sellerId,
+          content: `Hola, soy ${demoProduct.sellerName}. Esta es una conversación demo sobre ${demoProduct.title}.`,
+          createdAt: new Date("2026-05-05T10:00:00.000Z").toISOString(),
+        },
+        {
+          id: `${conversationId}-2`,
+          senderId: demoProduct.sellerId,
+          content: "Puedes escribir para ver cómo se sentiría el chat, pero no se enviará a una persona real.",
+          createdAt: new Date("2026-05-05T10:01:00.000Z").toISOString(),
+        },
+      ],
+    } satisfies ConversationThread;
+  }
+
   const supabase = await createServerSupabaseClient();
   const { data: conversation, error: conversationError } = await supabase
     .from("conversations")
@@ -165,6 +202,7 @@ export async function getConversationThread(conversationId: string, currentUserI
     currentUserId,
     counterpartId,
     currentUserHasRated,
+    isDemo: false,
     messages: messages.map((message) => ({
       id: message.id,
       senderId: message.sender_id,

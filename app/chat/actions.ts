@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
+import { demoProducts } from "@/lib/products/demo-data";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export type OpenConversationResult = {
@@ -48,6 +49,16 @@ export async function openConversation(productId: string): Promise<OpenConversat
       message: "Debes iniciar sesión para contactar al vendedor.",
       conversationId: null,
       redirectTo: "/login",
+    };
+  }
+
+  const demoProduct = demoProducts.find((product) => product.id === productId);
+  if (demoProduct) {
+    return {
+      status: "success",
+      message: "Abriendo vista demo de conversación.",
+      conversationId: `demo-thread-${demoProduct.id}`,
+      redirectTo: `/chat/demo-thread-${demoProduct.id}`,
     };
   }
 

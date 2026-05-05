@@ -68,4 +68,22 @@ describe("openConversation", () => {
     expect(result.message).toContain("propia publicación");
     expect(conversationsFromMock).not.toHaveBeenCalled();
   });
+
+  it("returns a demo preview thread for fallback products", async () => {
+    getUserMock.mockResolvedValue({
+      data: { user: { id: "buyer-1" } },
+      error: null,
+    });
+
+    createServerSupabaseClientMock.mockResolvedValue({
+      auth: { getUser: getUserMock },
+      from: vi.fn(),
+    });
+
+    const result = await openConversation("demo-tomate-don-luis");
+
+    expect(result.status).toBe("success");
+    expect(result.redirectTo).toBe("/chat/demo-thread-demo-tomate-don-luis");
+    expect(conversationsFromMock).not.toHaveBeenCalled();
+  });
 });

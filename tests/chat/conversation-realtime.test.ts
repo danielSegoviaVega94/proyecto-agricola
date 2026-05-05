@@ -10,10 +10,23 @@ type InsertPayload = {
 
 describe("buildChatRealtimeBridge", () => {
   let insertMock: ReturnType<typeof vi.fn>;
+  let selectMock: ReturnType<typeof vi.fn>;
+  let singleMock: ReturnType<typeof vi.fn>;
   let onCallback: ((payload: { new: InsertPayload & { id: string; created_at: string } }) => void) | null;
 
   beforeEach(() => {
-    insertMock = vi.fn().mockResolvedValue({ error: null });
+    singleMock = vi.fn().mockResolvedValue({
+      data: {
+        id: "message-1",
+        conversation_id: "conversation-1",
+        sender_id: "buyer-1",
+        content: "Hola, ¿sigue disponible?",
+        created_at: "2026-05-05T10:00:00.000Z",
+      },
+      error: null,
+    });
+    selectMock = vi.fn().mockReturnValue({ single: singleMock });
+    insertMock = vi.fn().mockReturnValue({ select: selectMock });
     onCallback = null;
   });
 
@@ -50,6 +63,7 @@ describe("buildChatRealtimeBridge", () => {
       sender_id: "buyer-1",
       content: "Hola, ¿sigue disponible?",
     });
+    expect(received[0]).toBe("Hola, ¿sigue disponible?");
 
     expect(onCallback).not.toBeNull();
     onCallback?.({
@@ -62,6 +76,6 @@ describe("buildChatRealtimeBridge", () => {
       },
     });
 
-    expect(received).toEqual(["Sí, tengo stock."]);
+    expect(received).toEqual(["Hola, ¿sigue disponible?", "Sí, tengo stock."]);
   });
 });

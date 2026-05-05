@@ -103,6 +103,11 @@ pnpm test:e2e
 - `supabase gen types` vía CLI puede requerir:
   - `supabase login` no interactivo (token), o
   - Docker según modo de generación usado por CLI.
+- Ajuste UX post Paso 9:
+  - El acceso global a `Chat` fue removido del menú principal.
+  - Productos demo abren una conversación demo local para previsualizar el flujo.
+  - El hilo agrega el mensaje enviado de forma inmediata, sin depender solo del eco Realtime.
+  - Catálogo, landing y detalle usan imágenes visibles (URLs válidas o rutas resueltas de Storage).
 
 ## 7) Definición de “dónde continuar”
 

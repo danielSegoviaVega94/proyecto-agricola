@@ -14,6 +14,7 @@ describe("ProductCard", () => {
           averageScore: 4.9,
           minPricePerUnit: 1300,
           minQuantityLabel: "desde 30kg",
+          imageUrl: "https://example.com/tomate.jpg",
         }}
       />,
     );
@@ -22,5 +23,6 @@ describe("ProductCard", () => {
     expect(html).toContain("4.9");
     expect(html).toContain("Vicuña");
     expect(html).toContain("/producto/product-1");
+    expect(html).toContain("https://example.com/tomate.jpg");
   });
 });

@@ -3,10 +3,42 @@ import Link from "next/link";
 export default function Home() {
   const categories = ["Todas", "Verduras", "Frutas", "Hierbas", "Hortalizas", "Legumbres"];
   const products = [
-    { title: "Tomate orgánico Vicuña", price: "$1.300", detail: "/kg desde 30kg", rating: "4.9", comuna: "Vicuña" },
-    { title: "Lechuga hidropónica", price: "$800", detail: "/unidad", rating: "4.7", comuna: "La Serena" },
-    { title: "Uva de mesa Elqui", price: "$2.200", detail: "/kg", rating: "5.0", comuna: "Paihuano" },
-    { title: "Zapallo italiano", price: "$700", detail: "/kg desde 10kg", rating: "4.6", comuna: "Ovalle" },
+    {
+      title: "Tomate orgánico Vicuña",
+      price: "$1.300",
+      detail: "/kg desde 30kg",
+      rating: "4.9",
+      comuna: "Vicuña",
+      image:
+        "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=1200&q=80&auto=format&fit=crop",
+    },
+    {
+      title: "Lechuga hidropónica",
+      price: "$800",
+      detail: "/unidad",
+      rating: "4.7",
+      comuna: "La Serena",
+      image:
+        "https://images.unsplash.com/photo-1622206151246-4e6f017f8b54?w=1200&q=80&auto=format&fit=crop",
+    },
+    {
+      title: "Uva de mesa Elqui",
+      price: "$2.200",
+      detail: "/kg",
+      rating: "5.0",
+      comuna: "Paihuano",
+      image:
+        "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=1200&q=80&auto=format&fit=crop",
+    },
+    {
+      title: "Zapallo italiano",
+      price: "$700",
+      detail: "/kg desde 10kg",
+      rating: "4.6",
+      comuna: "Ovalle",
+      image:
+        "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=1200&q=80&auto=format&fit=crop",
+    },
   ];
 
   return (
@@ -65,7 +97,10 @@ export default function Home() {
           <div className="mt-3 grid grid-cols-2 gap-3">
             {products.map((product) => (
               <article key={product.title} className="overflow-hidden rounded-2xl border border-[#f0eee8] bg-white">
-                <div className="aspect-square bg-gradient-to-br from-[#e8f5ee] to-[#fafaf7]" />
+                <div className="aspect-square bg-gradient-to-br from-[#e8f5ee] to-[#fafaf7]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={product.image} alt={product.title} className="h-full w-full object-cover" />
+                </div>
                 <div className="p-3">
                   <h3 className="text-sm font-semibold leading-5 text-[#0f0f0f]">{product.title}</h3>
                   <p className="mt-1 text-xs text-[#8a8a8a]">
@@ -101,9 +136,6 @@ export default function Home() {
           </Link>
           <Link href="/productos" className="flex flex-1 flex-col items-center justify-center text-xs font-medium text-[#8a8a8a]">
             Buscar
-          </Link>
-          <Link href="/chat" className="flex flex-1 flex-col items-center justify-center text-xs font-medium text-[#8a8a8a]">
-            Chat
           </Link>
           <Link href="/perfil" className="flex flex-1 flex-col items-center justify-center text-xs font-medium text-[#8a8a8a]">
             Yo

@@ -21,6 +21,7 @@ type RealtimeChannel = {
 };
 
 type InsertResult = {
+  data?: ChatMessageRecord | null;
   error: { message?: string } | null;
 };
 
@@ -30,7 +31,11 @@ type RealtimeSupabaseLike = {
       conversation_id: string;
       sender_id: string;
       content: string;
-    }) => PromiseLike<InsertResult> | InsertResult;
+    }) => {
+      select?: (columns: string) => {
+        single: () => PromiseLike<InsertResult> | InsertResult;
+      };
+    } | (PromiseLike<InsertResult> | InsertResult);
   };
   channel: (name: string) => RealtimeChannel;
   removeChannel: (channel: unknown) => unknown;
@@ -65,14 +70,40 @@ export function buildChatRealtimeBridge(
         return { error: "El mensaje está vacío." as const };
       }
 
-      const { error } = (await supabase.from("messages").insert({
+      if (conversationId.startsWith("demo-thread-")) {
+        onIncomingMessage({
+          id: `${conversationId}-${Date.now()}`,
+          conversation_id: conversationId,
+          sender_id: senderId,
+          content: trimmed,
+          created_at: new Date().toISOString(),
+        });
+
+        return { error: null };
+      }
+
+      const insertResult = supabase.from("messages").insert({
         conversation_id: conversationId,
         sender_id: senderId,
         content: trimmed,
-      })) as InsertResult;
+      });
+      const response =
+        typeof insertResult === "object" &&
+        insertResult &&
+        "select" in insertResult &&
+        typeof insertResult.select === "function"
+          ? await insertResult
+              .select("id,conversation_id,sender_id,content,created_at")
+              .single()
+          : await insertResult;
+      const { data, error } = response as InsertResult;
 
       if (error) {
         return { error: "No fue posible enviar el mensaje." as const };
+      }
+
+      if (data) {
+        onIncomingMessage(data);
       }
 
       return { error: null };

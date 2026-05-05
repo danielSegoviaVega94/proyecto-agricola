@@ -1,4 +1,5 @@
 import { demoProducts } from "@/lib/products/demo-data";
+import { resolveProductImageUrl } from "@/lib/products/image-url";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export type ProductCardModel = {
@@ -8,6 +9,7 @@ export type ProductCardModel = {
   averageScore: number;
   minPricePerUnit: number;
   minQuantityLabel: string;
+  imageUrl: string;
 };
 
 type CatalogFilters = {
@@ -31,6 +33,12 @@ type TierRow = {
   price_per_unit: number;
 };
 
+type ImageRow = {
+  product_id: string;
+  storage_path: string;
+  sort_order: number;
+};
+
 type RatingSummaryRow = {
   user_id: string;
   average_score: number;
@@ -48,6 +56,7 @@ function toCardModel(
   product: { id: string; title: string; comuna: string; sellerId: string },
   tiers: TierRow[],
   ratingsMap: Map<string, number>,
+  imagesMap: Map<string, string>,
 ): ProductCardModel {
   const productTiers = tiers.filter((tier) => tier.product_id === product.id);
   const cheapestTier = productTiers.reduce<TierRow | null>((cheapest, current) => {
@@ -64,6 +73,7 @@ function toCardModel(
     averageScore: Number((ratingsMap.get(product.sellerId) ?? 0).toFixed(1)),
     minPricePerUnit: cheapestTier?.price_per_unit ?? 0,
     minQuantityLabel: cheapestTier ? formatMinQuantityLabel(cheapestTier.min_quantity) : "",
+    imageUrl: imagesMap.get(product.id) ?? "",
   };
 }
 
@@ -104,6 +114,7 @@ function applyFallbackFilters(filters: CatalogFilters): ProductCardModel[] {
         averageScore: product.sellerAverageScore,
         minPricePerUnit: cheapestTier.pricePerUnit,
         minQuantityLabel: formatMinQuantityLabel(cheapestTier.minQuantity),
+        imageUrl: product.images[0] ?? "",
       };
     });
 }
@@ -147,12 +158,17 @@ export async function getCatalogProducts(filters: CatalogFilters): Promise<Produ
   const productIds = products.map((product) => product.id);
   const sellerIds = [...new Set(products.map((product) => product.sellerId))];
 
-  const [{ data: tiersData }, { data: ratingsData }] = await Promise.all([
+  const [{ data: tiersData }, { data: ratingsData }, { data: imagesData }] = await Promise.all([
     supabase
       .from("price_tiers")
       .select("product_id,min_quantity,price_per_unit")
       .in("product_id", productIds),
     supabase.from("user_ratings_summary").select("user_id,average_score").in("user_id", sellerIds),
+    supabase
+      .from("product_images")
+      .select("product_id,storage_path,sort_order")
+      .in("product_id", productIds)
+      .order("sort_order", { ascending: true }),
   ]);
 
   const tiers = (tiersData as TierRow[] | null) ?? [];
@@ -162,8 +178,14 @@ export async function getCatalogProducts(filters: CatalogFilters): Promise<Produ
       Number(rating.average_score ?? 0),
     ]),
   );
+  const imagesMap = new Map<string, string>();
+  for (const image of ((imagesData as ImageRow[] | null) ?? [])) {
+    if (!imagesMap.has(image.product_id)) {
+      imagesMap.set(image.product_id, resolveProductImageUrl(image.storage_path));
+    }
+  }
 
-  const models = products.map((product) => toCardModel(product, tiers, ratingsMap));
+  const models = products.map((product) => toCardModel(product, tiers, ratingsMap, imagesMap));
 
   const minRating = filters.minRating;
   if (typeof minRating === "number") {
@@ -262,6 +284,6 @@ export async function getProductDetail(productId: string): Promise<ProductDetail
         minQuantity: Number(tier.min_quantity),
         pricePerUnit: Number(tier.price_per_unit),
       })) ?? [],
-    images: imagesResponse.data?.map((image) => image.storage_path) ?? [],
+    images: imagesResponse.data?.map((image) => resolveProductImageUrl(image.storage_path)) ?? [],
   };
 }

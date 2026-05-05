@@ -11,5 +11,6 @@ describe("Home landing page", () => {
     expect(html).toContain("a tu cocina");
     expect(html).toContain("Buscar tomate, lechuga, frutas...");
     expect(html).toContain("Empezar a vender");
+    expect(html).not.toContain(">Chat<");
   });
 });
