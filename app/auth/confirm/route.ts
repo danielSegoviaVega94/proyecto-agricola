@@ -12,8 +12,8 @@ export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const tokenHash = requestUrl.searchParams.get("token_hash");
   const type = requestUrl.searchParams.get("type");
-  const nextPath = requestUrl.searchParams.get("next") ?? "/supabase-smoke";
-  const safeNextPath = nextPath.startsWith("/") ? nextPath : "/supabase-smoke";
+  const nextPath = requestUrl.searchParams.get("next") ?? "/";
+  const safeNextPath = nextPath.startsWith("/") ? nextPath : "/";
   const successRedirectUrl = new URL(safeNextPath, requestUrl.origin);
 
   if (!tokenHash || !isOtpType(type)) {

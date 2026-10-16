@@ -42,7 +42,7 @@ export default async function ChatThreadPage({ params }: ChatThreadPageProps) {
 
   return (
     <div className="min-h-screen bg-[#fafaf7]">
-      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-8 pt-4">
+      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-8 pt-4 md:max-w-3xl md:px-6">
         <header className="mb-4 flex items-center justify-between">
           <Link href="/chat" className="rounded-lg px-2 py-1 text-sm text-[#4a4a4a] hover:bg-[#f0eee8]">
             Volver
@@ -85,11 +85,10 @@ export default async function ChatThreadPage({ params }: ChatThreadPageProps) {
         <ChatThread
           conversationId={thread.id}
           currentUserId={thread.currentUserId}
-          isDemo={thread.isDemo}
           initialMessages={thread.messages}
         />
 
-        {thread.status === "closed" && !thread.isDemo ? (
+        {thread.status === "closed" ? (
           <div className="mt-4">
             {thread.currentUserHasRated ? (
               <p className="rounded-xl border border-[#e8e6e0] bg-[#fafaf7] px-3 py-3 text-sm text-[#4a4a4a]">
@@ -105,13 +104,11 @@ export default async function ChatThreadPage({ params }: ChatThreadPageProps) {
           </div>
         ) : null}
 
-        {!thread.isDemo ? (
-          <ReportButton
-            action={submitReport}
-            conversationId={thread.id}
-            counterpartName={thread.counterpartName}
-          />
-        ) : null}
+        <ReportButton
+          action={submitReport}
+          conversationId={thread.id}
+          counterpartName={thread.counterpartName}
+        />
       </main>
     </div>
   );

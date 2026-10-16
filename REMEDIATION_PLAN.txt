@@ -1,0 +1,37 @@
+# PROMPT DE ACCIÓN: REMEDIACIÓN Y ADAPTACIÓN DESKTOP
+
+Actúa como un Ingeniero Senior de Software y experto en UX. Tu tarea es ejecutar un plan de acción para sanear el proyecto `punto-venta-agricultura` basado en la auditoría técnica reciente y expandir su diseño a vistas de escritorio.
+
+## CONTEXTO
+El proyecto es un marketplace mobile-first (Next.js 16 + Supabase). La auditoría detectó que el proyecto está "secuestrado" por datos demo y rutas de prueba que impiden su uso real.
+
+## TAREA 1: REMEDIACIÓN CRÍTICA (Basado en Auditoría)
+1. **Sanear Auth:** Eliminar todas las redirecciones hardcodeadas a `/supabase-smoke`. El login debe redirigir al parámetro `next` o, en su defecto, al `/dashboard`.
+2. **Navegación Real:** Crear `app/perfil/page.tsx` para manejar el redireccionamiento automático al perfil del usuario logueado (`/perfil/[id]`). Si no hay sesión, mandar a `/login`.
+3. **Limpiar Catálogo:** Eliminar el "fallback" de datos demo en `lib/products/catalog.ts`. Si no hay productos, debe retornar una lista vacía y la UI debe mostrar un estado de "No se encontraron productos".
+4. **Activar Landing:** Convertir la barra de búsqueda de `app/page.tsx` en un formulario funcional que apunte a `/productos?q=...`. Sustituir los productos hardcodeados por una query real a Supabase (ej: los 4 más recientes).
+5. **Eliminar Interceptores Demo:** Quitar cualquier lógica en Server Actions que desvíe el flujo hacia IDs `demo-thread-*` o `demo-tomate-*`.
+
+## TAREA 2: ADAPTACIÓN DESKTOP (Responsive)
+El proyecto es "Mobile-First", pero en escritorio se ve como una columna estrecha. Debes implementar un diseño responsive sin romper la estética simple:
+1. **Layout Principal:** Modificar el contenedor principal (actualmente limitado a `max-w-[420px]`) para que en pantallas grandes (`md:`, `lg:`) use un layout de rejilla o centrado más amplio.
+2. **Navegación Adaptativa:** 
+   - En mobile: Mantener el Bottom Nav.
+   - En desktop: Ocultar el Bottom Nav y mostrar un Sidebar o un Navbar superior con los mismos accesos.
+3. **Catálogo y Grillas:** En desktop, las listas de productos deben pasar de 2 columnas a 3 o 4 columnas usando CSS Grid.
+4. **Detalle de Producto:** En desktop, usar un layout de dos columnas (Imagen a la izquierda, información y botón de contacto a la derecha).
+
+## MODO DE EJECUCIÓN
+1. **Investigación:** Lee el archivo `plans/audit-report.md` para entender el detalle de los fallos.
+2. **Planificación:** Genera un plan paso a paso antes de editar.
+3. **Ejecución Quirúrgica:** Usa `replace` para no borrar lógica necesaria.
+4. **Validación:** Ejecuta `pnpm build` y `pnpm lint` para asegurar que no hay regresiones.
+
+## CRITERIOS DE ÉXITO
+- El login lleva al usuario a su destino real, no a una página de smoke test.
+- El botón "Yo" funciona y lleva al perfil del usuario.
+- No aparecen productos falsos (demo) si la base de datos está vacía.
+- Al abrir la app en un monitor de PC, el contenido aprovecha el ancho de pantalla de forma elegante en lugar de ser una columna delgada.
+
+---
+**INSTRUCCIÓN FINAL:** Una vez leído esto, genera tu plan de acción detallado y comienza con la Tarea 1.

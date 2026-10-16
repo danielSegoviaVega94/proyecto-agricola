@@ -48,7 +48,7 @@ export default async function ChatInboxPage({ searchParams }: ChatInboxPageProps
 
   return (
     <div className="min-h-screen bg-[#fafaf7]">
-      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-20 pt-4">
+      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-20 pt-4 md:max-w-3xl md:px-6">
         <header className="mb-5 flex items-center justify-between">
           <Link href="/" className="rounded-lg px-2 py-1 text-sm text-[#4a4a4a] hover:bg-[#f0eee8]">
             Volver

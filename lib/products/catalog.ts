@@ -1,4 +1,3 @@
-import { demoProducts } from "@/lib/products/demo-data";
 import { resolveProductImageUrl } from "@/lib/products/image-url";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
@@ -77,48 +76,6 @@ function toCardModel(
   };
 }
 
-function applyFallbackFilters(filters: CatalogFilters): ProductCardModel[] {
-  const query = (filters.q ?? "").toLowerCase();
-
-  return demoProducts
-    .filter((product) => {
-      if (filters.categoryId && product.categoryId !== filters.categoryId) {
-        return false;
-      }
-
-      if (filters.comuna && product.comuna !== filters.comuna) {
-        return false;
-      }
-
-      if (filters.minRating && product.sellerAverageScore < filters.minRating) {
-        return false;
-      }
-
-      if (!query) {
-        return true;
-      }
-
-      return (
-        product.title.toLowerCase().includes(query) || product.description.toLowerCase().includes(query)
-      );
-    })
-    .map((product) => {
-      const cheapestTier = product.priceTiers.reduce((cheapest, current) =>
-        current.pricePerUnit < cheapest.pricePerUnit ? current : cheapest,
-      );
-
-      return {
-        id: product.id,
-        title: product.title,
-        comuna: product.comuna,
-        averageScore: product.sellerAverageScore,
-        minPricePerUnit: cheapestTier.pricePerUnit,
-        minQuantityLabel: formatMinQuantityLabel(cheapestTier.minQuantity),
-        imageUrl: product.images[0] ?? "",
-      };
-    });
-}
-
 export async function getCatalogProducts(filters: CatalogFilters): Promise<ProductCardModel[]> {
   const supabase = await createServerSupabaseClient();
 
@@ -145,7 +102,7 @@ export async function getCatalogProducts(filters: CatalogFilters): Promise<Produ
   const { data: productsData, error: productsError } = await productsQuery;
 
   if (productsError || !productsData || productsData.length === 0) {
-    return applyFallbackFilters(filters);
+    return [];
   }
 
   const products = (productsData as ProductRow[]).map((row) => ({
@@ -195,6 +152,60 @@ export async function getCatalogProducts(filters: CatalogFilters): Promise<Produ
   return models;
 }
 
+export async function getLatestCatalogProducts(limit = 4): Promise<ProductCardModel[]> {
+  const supabase = await createServerSupabaseClient();
+
+  const { data: productsData, error: productsError } = await supabase
+    .from("products")
+    .select("id,title,comuna,seller_id,category_id,created_at")
+    .eq("status", "active")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+
+  if (productsError || !productsData || productsData.length === 0) {
+    return [];
+  }
+
+  const products = (productsData as ProductRow[]).map((row) => ({
+    id: row.id,
+    title: row.title,
+    comuna: row.comuna,
+    sellerId: row.seller_id,
+  }));
+
+  const productIds = products.map((product) => product.id);
+  const sellerIds = [...new Set(products.map((product) => product.sellerId))];
+
+  const [{ data: tiersData }, { data: ratingsData }, { data: imagesData }] = await Promise.all([
+    supabase
+      .from("price_tiers")
+      .select("product_id,min_quantity,price_per_unit")
+      .in("product_id", productIds),
+    supabase.from("user_ratings_summary").select("user_id,average_score").in("user_id", sellerIds),
+    supabase
+      .from("product_images")
+      .select("product_id,storage_path,sort_order")
+      .in("product_id", productIds)
+      .order("sort_order", { ascending: true }),
+  ]);
+
+  const tiers = (tiersData as TierRow[] | null) ?? [];
+  const ratingsMap = new Map(
+    ((ratingsData as RatingSummaryRow[] | null) ?? []).map((rating) => [
+      rating.user_id,
+      Number(rating.average_score ?? 0),
+    ]),
+  );
+  const imagesMap = new Map<string, string>();
+  for (const image of ((imagesData as ImageRow[] | null) ?? [])) {
+    if (!imagesMap.has(image.product_id)) {
+      imagesMap.set(image.product_id, resolveProductImageUrl(image.storage_path));
+    }
+  }
+
+  return products.map((product) => toCardModel(product, tiers, ratingsMap, imagesMap));
+}
+
 export type ProductDetailModel = {
   id: string;
   title: string;
@@ -212,25 +223,6 @@ export type ProductDetailModel = {
 };
 
 export async function getProductDetail(productId: string): Promise<ProductDetailModel | null> {
-  const fallback = demoProducts.find((product) => product.id === productId);
-  if (fallback) {
-    return {
-      id: fallback.id,
-      title: fallback.title,
-      description: fallback.description,
-      comuna: fallback.comuna,
-      stock: fallback.stock,
-      measureUnit: fallback.measureUnit,
-      sellerId: fallback.sellerId,
-      sellerName: fallback.sellerName,
-      sellerBusinessName: fallback.sellerBusinessName,
-      sellerAverageScore: fallback.sellerAverageScore,
-      categoryLabel: fallback.categoryLabel,
-      priceTiers: fallback.priceTiers,
-      images: fallback.images,
-    };
-  }
-
   const supabase = await createServerSupabaseClient();
   const { data: product, error: productError } = await supabase
     .from("products")

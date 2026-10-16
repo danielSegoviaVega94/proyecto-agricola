@@ -5,8 +5,8 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
-  const nextPath = requestUrl.searchParams.get("next") ?? "/supabase-smoke";
-  const safeNextPath = nextPath.startsWith("/") ? nextPath : "/supabase-smoke";
+  const nextPath = requestUrl.searchParams.get("next") ?? "/";
+  const safeNextPath = nextPath.startsWith("/") ? nextPath : "/";
   const redirectUrl = new URL(safeNextPath, requestUrl.origin);
 
   if (!code) {

@@ -1,6 +1,6 @@
 # PROJECT_STATUS.md — Punto de Venta Agricultura
 
-Fecha de actualización: 2026-05-05  
+Fecha de actualizacion: 2026-05-05  
 Estado general: avance hasta **Paso 12** del Build Order del blueprint.
 
 ## 1) Estado por paso (Blueprint §17)
@@ -19,7 +19,7 @@ Estado general: avance hasta **Paso 12** del Build Order del blueprint.
 | 9 Cierre + Valoración | ✅ | `feat/step-9-ratings` / `6449ba5` | cerrar trato, `RatingForm`, `RatingStars`, perfil con resumen de valoraciones |
 | 10 Reportes | ✅ | `feat/step-10-reports` / `0e49359` | `ReportButton`, `submitReport`, tests unit + RLS |
 | 11 Panel Admin | ✅ | `feat/step-11-admin` / `9a454c9` | guard admin, `/admin/*`, suspensión/reactivación y bloqueo a usuarios suspendidos |
-| 12 PWA | ✅ | `feat/step-12-pwa` / `HEAD de la rama` | `manifest`, iconos 192/512, `next-pwa`, `sw.js` generado en build |
+| 12 PWA | ✅ | `feat/step-12-pwa` / `79c6dad` | `manifest`, iconos 192/512, `next-pwa`, `sw.js` generado en build |
 
 ## 2) Ramas activas relevantes
 
@@ -63,7 +63,6 @@ Estado general: avance hasta **Paso 12** del Build Order del blueprint.
   - `app/producto/[id]/page.tsx`
   - `components/products/product-card.tsx`
   - `lib/products/catalog.ts`
-  - `lib/products/demo-data.ts`
 - Conversaciones:
   - `app/chat/actions.ts`
   - `app/chat/page.tsx`
@@ -118,13 +117,16 @@ Estado general: avance hasta **Paso 12** del Build Order del blueprint.
 pnpm test
 pnpm lint
 pnpm typecheck
+pnpm build
 pnpm test:e2e
 ```
 
 ## 6) Estado de entorno y notas operativas
 
 - `.env.local` existe localmente (no versionado), con URL/keys de Supabase.
+- `README.md` ya describe el proyecto real y no el template de `create-next-app`.
 - `middleware.ts` de Next 16 muestra warning deprecado (migrar a `proxy` más adelante).
+- `pnpm build` usa `next build --webpack` por compatibilidad con la integración PWA.
 - `supabase gen types` vía CLI puede requerir:
   - `supabase login` no interactivo (token), o
   - Docker según modo de generación usado por CLI.
@@ -133,8 +135,21 @@ pnpm test:e2e
   - Productos demo abren una conversación demo local para previsualizar el flujo.
   - El hilo agrega el mensaje enviado de forma inmediata, sin depender solo del eco Realtime.
   - Catálogo, landing y detalle usan imágenes visibles (URLs válidas o rutas resueltas de Storage).
+- Compatibilidad Next 16:
+  - Los estados iniciales de formularios fueron movidos fuera de archivos `"use server"` para que `build` sea válido.
+  - Los artefactos `public/sw.js` y `public/workbox-*.js` se generan en build y no se versionan como fuente.
 
-## 7) Definición de “dónde continuar”
+## 7) Radiografía completa
+
+Para un handoff completo, leer:
+
+- `README.md`
+- `docs/PROJECT_STATUS.md`
+- `docs/PROJECT_RADIOGRAPHY.md`
+- `docs/blueprint.md`
+- `CONTEXT.md`
+
+## 8) Definición de “dónde continuar”
 
 Continuar en **Paso 13 — Deploy a Vercel** del blueprint:
 
@@ -142,7 +157,7 @@ Continuar en **Paso 13 — Deploy a Vercel** del blueprint:
 2. Cargar variables de entorno.
 3. Verificar smoke de producción.
 
-## 8) Reglas de continuidad para otras IA
+## 9) Reglas de continuidad para otras IA
 
 - Mantener TDD estricto: RED → GREEN → REFACTOR.
 - No avanzar de paso con `pnpm test`, `pnpm lint`, `pnpm typecheck` en rojo.

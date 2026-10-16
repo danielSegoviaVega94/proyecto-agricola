@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Punto de Venta Agricultura
 
-## Getting Started
+Marketplace web mobile-first para conectar agricultores pequenos y medianos con compradores locales, eliminando intermediarios.
 
-First, run the development server:
+## Estado actual
+
+- Build Order completado hasta el **Paso 12 (PWA)**.
+- Rama activa al momento de este documento: `feat/step-12-pwa`.
+- Estado detallado: [docs/PROJECT_STATUS.md](docs/PROJECT_STATUS.md)
+- Radiografia completa y handoff: [docs/PROJECT_RADIOGRAPHY.md](docs/PROJECT_RADIOGRAPHY.md)
+- Blueprint de producto y ejecucion: [docs/blueprint.md](docs/blueprint.md)
+- Contexto de dominio: [CONTEXT.md](CONTEXT.md)
+
+## Stack
+
+- Next.js 16 App Router
+- TypeScript
+- Supabase Auth + Postgres + Realtime + Storage
+- Vercel
+- Vitest
+- Playwright
+- PWA con `@ducanh2912/next-pwa`
+
+## Comandos principales
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
+pnpm build
+pnpm test
+pnpm lint
+pnpm typecheck
+pnpm test:e2e
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Notas operativas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `pnpm build` usa `next build --webpack` para compatibilidad con la integracion PWA bajo Next 16.
+- El proyecto genera `public/sw.js` y archivos Workbox en build. Son artefactos generados, no fuente.
+- `middleware.ts` sigue funcionando, pero Next 16 ya marca deprecacion hacia `proxy`.
+- El chat de productos demo abre una conversacion demo local para previsualizar el flujo cuando no existe un producto real en la base de datos.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Funcionalidad implementada
 
-## Learn More
+- Auth por Google / telefono / email fallback para testing.
+- Onboarding y perfil publico.
+- Publicacion de productos con categorias, tramos e imagenes.
+- Catalogo y detalle con filtros y busqueda.
+- Conversaciones, cierre de trato, valoraciones y reportes.
+- Panel admin para moderacion y suspension/reactivacion.
+- Manifest PWA e iconos instalables.
 
-To learn more about Next.js, take a look at the following resources:
+## Siguiente hito
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+El siguiente paso del blueprint es **Paso 13: Deploy a Vercel**.

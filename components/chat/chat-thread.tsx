@@ -8,7 +8,6 @@ import { buildChatRealtimeBridge, type ChatMessageRecord } from "@/lib/chat/real
 type ChatThreadProps = {
   conversationId: string;
   currentUserId: string;
-  isDemo?: boolean;
   initialMessages: Array<{
     id: string;
     senderId: string;
@@ -36,7 +35,6 @@ function toUiMessage(message: ChatMessageRecord) {
 export function ChatThread({
   conversationId,
   currentUserId,
-  isDemo = false,
   initialMessages,
 }: ChatThreadProps) {
   const [messages, setMessages] = useState(initialMessages);
@@ -138,11 +136,6 @@ export function ChatThread({
             Enviar
           </button>
         </div>
-        {isDemo ? (
-          <p className="mt-2 text-xs text-[#8a8a8a]">
-            Vista demo: tus mensajes se muestran localmente para previsualizar el flujo.
-          </p>
-        ) : null}
         {errorMessage ? <p className="mt-2 text-xs text-[#b91c1c]">{errorMessage}</p> : null}
       </form>
     </section>

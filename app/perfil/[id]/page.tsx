@@ -33,7 +33,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
   return (
     <div className="min-h-screen bg-[#fafaf7]">
-      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-10 pt-6">
+      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-10 pt-6 md:max-w-2xl md:px-8">
         <section className="rounded-2xl border border-[#f0eee8] bg-white p-4">
           <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#e8f5ee] text-2xl font-bold text-[#115e2c]">
             {avatarLabel}

@@ -1,0 +1,110 @@
+ Quiero que hagas una AUDITORIA COMPLETA de este proyecto y me entregues un diagnostico tecnico y de producto.
+
+  Proyecto:
+  `projects/punto-venta-agricultura`
+
+  Documentacion obligatoria a leer antes de revisar:
+  - `projects/punto-venta-agricultura/README.md`
+  - `projects/punto-venta-agricultura/CONTEXT.md`
+  - `projects/punto-venta-agricultura/docs/blueprint.md`
+  - `projects/punto-venta-agricultura/docs/PROJECT_STATUS.md`
+  - `projects/punto-venta-agricultura/docs/PROJECT_RADIOGRAPHY.md`
+  - `projects/punto-venta-agricultura/.od/` completo como referencia visual y UX
+
+  Stack:
+  - Next.js 16 App Router
+  - TypeScript
+  - Supabase Auth + DB + Realtime + Storage
+  - PWA con `@ducanh2912/next-pwa`
+
+  Tu tarea NO es implementar.
+  Tu tarea es REVISAR, AUDITAR, DETECTAR PROBLEMAS, INCONSISTENCIAS, RIESGOS y DEJAR UNA RADIOGRAFIA CRITICA DEL PROYECTO.
+
+  Quiero una auditoria de:
+  1. Producto
+  2. UX/UI
+  3. Navegacion
+  4. Auth
+  5. Chat
+  6. Catalogo y filtros
+  7. Perfil y estados de sesion
+  8. Panel admin
+  9. PWA
+  10. Calidad de codigo
+  11. Coherencia con blueprint
+  12. Coherencia con CONTEXT.md
+  13. Coherencia con los prototipos `.od/`
+  14. Riesgos para produccion
+  15. Cosas incompletas o mal resueltas aunque “funcionen”
+
+  Problemas que YA sospecho y quiero que verifiques en profundidad:
+  - Los filtros no funcionan bien.
+  - No tiene sentido que exista un apartado separado de “Buscar” si ya hay barra de busqueda y filtros; revisa si la arquitectura de navegacion tiene
+  sentido o si es redundante/confusa.
+  - El perfil no deberia verse o aparecer igual si el usuario no esta logueado; revisa bien los estados anonimo vs autenticado.
+  - El login no funciona correctamente; revisa el flujo real y compáralo contra lo documentado.
+  - Revisa si hay otros problemas similares de UX rota, reglas de negocio incumplidas, flows falsos o placeholders disfrazados de funcionalidad.
+  - Revisa si hay features “demo” o fallback que rompen la coherencia del producto real.
+  - Revisa si hay decisiones tecnicas que hagan que una pantalla parezca lista pero realmente no lo este.
+
+  Modo de trabajo esperado:
+  - Lee primero toda la documentacion.
+  - Luego inspecciona el codigo.
+  - Luego compara documentacion vs implementacion real.
+  - Luego compara implementacion real vs prototipos `.od/`.
+  - Luego revisa build/test/lint/typecheck si corresponde.
+  - Luego entrega findings priorizados.
+
+  Quiero que revises especialmente:
+  - Rutas App Router reales existentes
+  - Server actions
+  - Archivos `app/*`
+  - `lib/*`
+  - `components/*`
+  - `middleware.ts`
+  - `next.config.ts`
+  - `package.json`
+  - `supabase/migrations/*`
+  - tests existentes
+  - assets publicos
+  - manifest/PWA
+
+  Criterio de auditoria:
+  - No asumas que “si compila, está bien”.
+  - Prioriza bugs reales, incoherencias de producto, flujos rotos, problemas de seguridad, UX engañosa, deuda tecnica peligrosa y desacoples entre docs y
+  codigo.
+  - Detecta tambien problemas de navegacion, copy, estados vacios, pantallas redundantes, placeholders, rutas mal protegidas, fake states, datos demo donde
+  no deberian, etc.
+  - Si algo fue implementado solo para “verse bonito” pero no cumple la logica real, debes marcarlo.
+  - Si algo del blueprint esta incompleto, mal interpretado o parcialmente resuelto, debes decirlo.
+
+  Formato de salida obligatorio:
+  1. **Findings**
+     - Lista priorizada por severidad.
+     - Cada finding debe incluir:
+       - severidad: critica / alta / media / baja
+       - area
+       - problema
+       - impacto
+       - evidencia con archivos concretos
+       - si contradice blueprint, CONTEXT o prototipo, dilo explicitamente
+  2. **Inconsistencias Doc vs Codigo**
+  3. **Inconsistencias Prototipo vs Implementacion**
+  4. **Flujos rotos o dudosos**
+  5. **Riesgos de pasar esto a produccion**
+  6. **Quick wins**
+  7. **Recomendacion de orden de arreglo**
+  8. **Resumen ejecutivo final**
+     - corto, brutalmente honesto, sin adornos
+
+  Importante:
+  - No quiero una explicacion superficial.
+  - No quiero una lista de “todo se ve bien”.
+  - Si algo esta mal planteado a nivel producto, debes decirlo.
+  - Si algo esta duplicado o no tiene sentido en la navegacion, debes decirlo.
+  - Si el proyecto depende demasiado de datos demo o flujos fake, debes decirlo.
+  - Si la autenticacion, permisos o estados anonimos/autenticados estan mal resueltos, debes decirlo.
+  - Si el diseño implementado no respeta el lenguaje visual de `.od/`, debes decirlo.
+  - Si el blueprint dice una cosa y el codigo hace otra, debes decirlo.
+
+  Haz una auditoria de verdad.

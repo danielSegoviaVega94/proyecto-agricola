@@ -26,7 +26,7 @@ export default async function PublishPage() {
 
   return (
     <div className="min-h-screen bg-[#fafaf7]">
-      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-10 pt-6">
+      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-10 pt-6 md:max-w-3xl md:px-8">
         {profile?.is_suspended ? (
           <div className="mb-4 rounded-2xl border border-[#f2d5d5] bg-[#fff5f5] px-4 py-3 text-sm text-[#b91c1c]">
             Tu cuenta está suspendida. No puedes crear nuevas publicaciones hasta que el equipo revise tu caso.

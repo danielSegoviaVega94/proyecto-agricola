@@ -70,18 +70,6 @@ export function buildChatRealtimeBridge(
         return { error: "El mensaje está vacío." as const };
       }
 
-      if (conversationId.startsWith("demo-thread-")) {
-        onIncomingMessage({
-          id: `${conversationId}-${Date.now()}`,
-          conversation_id: conversationId,
-          sender_id: senderId,
-          content: trimmed,
-          created_at: new Date().toISOString(),
-        });
-
-        return { error: null };
-      }
-
       const insertResult = supabase.from("messages").insert({
         conversation_id: conversationId,
         sender_id: senderId,

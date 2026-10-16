@@ -69,21 +69,42 @@ describe("openConversation", () => {
     expect(conversationsFromMock).not.toHaveBeenCalled();
   });
 
-  it("returns a demo preview thread for fallback products", async () => {
+  it("returns an error when the requested product is missing", async () => {
     getUserMock.mockResolvedValue({
       data: { user: { id: "buyer-1" } },
       error: null,
     });
 
-    createServerSupabaseClientMock.mockResolvedValue({
-      auth: { getUser: getUserMock },
-      from: vi.fn(),
+    productMaybeSingleMock.mockResolvedValue({
+      data: null,
+      error: null,
     });
 
-    const result = await openConversation("demo-tomate-don-luis");
+    createServerSupabaseClientMock.mockResolvedValue({
+      auth: { getUser: getUserMock },
+      from: vi.fn((table: string) => {
+        if (table === "products") {
+          return {
+            select: vi.fn(() => ({
+              eq: vi.fn(() => ({
+                maybeSingle: productMaybeSingleMock,
+              })),
+            })),
+          };
+        }
 
-    expect(result.status).toBe("success");
-    expect(result.redirectTo).toBe("/chat/demo-thread-demo-tomate-don-luis");
+        if (table === "conversations") {
+          conversationsFromMock();
+        }
+
+        return {};
+      }),
+    });
+
+    const result = await openConversation("missing-product");
+
+    expect(result.status).toBe("error");
+    expect(result.message).toContain("publicación");
     expect(conversationsFromMock).not.toHaveBeenCalled();
   });
 });

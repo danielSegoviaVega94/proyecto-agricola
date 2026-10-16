@@ -23,7 +23,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
   return (
     <div className="min-h-screen bg-[#fafaf7]">
-      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-24 pt-4">
+      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-24 pt-4 md:max-w-6xl md:px-8 md:pb-12 lg:px-12">
         <header className="mb-3 flex items-center justify-between">
           <Link href="/productos" className="rounded-lg px-2 py-1 text-sm text-[#4a4a4a] hover:bg-[#f0eee8]">
             Volver
@@ -32,53 +32,91 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           <span className="w-12" />
         </header>
 
-        <div className="space-y-2">
-          <div className="aspect-square overflow-hidden rounded-2xl bg-[#e8f5ee]">
-            {product.images[0] ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={product.images[0]} alt={product.title} className="h-full w-full object-cover" />
+        <div className="md:grid md:grid-cols-2 md:gap-10 lg:gap-16">
+          <div className="md:sticky md:top-6 md:self-start">
+            <div className="aspect-square overflow-hidden rounded-2xl bg-[#e8f5ee]">
+              {product.images[0] ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={product.images[0]} alt={product.title} className="h-full w-full object-cover" />
+              ) : null}
+            </div>
+            {product.images.length > 1 ? (
+              <div className="mt-3 grid grid-cols-4 gap-2">
+                {product.images.slice(1, 5).map((image) => (
+                  <div key={image} className="aspect-square overflow-hidden rounded-xl bg-[#e8f5ee]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={image} alt="" className="h-full w-full object-cover" />
+                  </div>
+                ))}
+              </div>
             ) : null}
           </div>
-          <p className="text-xs font-medium text-[#16803c]">{product.categoryLabel}</p>
-          <h1 className="text-3xl font-bold tracking-tight text-[#0f0f0f]">{product.title}</h1>
-          <p className="text-sm text-[#8a8a8a]">
-            {product.sellerAverageScore.toFixed(1)} · {product.comuna} · {product.stock}
-            {product.measureUnit} disponibles
-          </p>
-        </div>
 
-        <section className="mt-5 space-y-2">
-          <h2 className="text-lg font-semibold text-[#0f0f0f]">Precio por volumen</h2>
-          <div className="rounded-xl border border-[#e8e6e0]">
-            {product.priceTiers.map((tier) => (
-              <div key={`${tier.minQuantity}-${tier.pricePerUnit}`} className="flex items-center justify-between border-b border-[#f0eee8] px-3 py-2 last:border-b-0">
-                <span className="text-sm text-[#4a4a4a]">
-                  {tier.minQuantity === 0 ? "Desde 0" : `Desde ${tier.minQuantity}`} {product.measureUnit}
-                </span>
-                <span className="text-sm font-semibold text-[#115e2c]">
-                  ${new Intl.NumberFormat("es-CL").format(tier.pricePerUnit)}
-                </span>
+          <div className="mt-4 md:mt-0">
+            <p className="text-xs font-medium text-[#16803c]">{product.categoryLabel}</p>
+            <h1 className="mt-1 text-3xl font-bold tracking-tight text-[#0f0f0f] md:text-4xl">
+              {product.title}
+            </h1>
+            <p className="mt-2 text-sm text-[#8a8a8a]">
+              {product.sellerAverageScore.toFixed(1)} · {product.comuna} · {product.stock}
+              {product.measureUnit} disponibles
+            </p>
+
+            <section className="mt-5 space-y-2">
+              <h2 className="text-lg font-semibold text-[#0f0f0f]">Precio por volumen</h2>
+              <div className="rounded-xl border border-[#e8e6e0]">
+                {product.priceTiers.map((tier) => (
+                  <div
+                    key={`${tier.minQuantity}-${tier.pricePerUnit}`}
+                    className="flex items-center justify-between border-b border-[#f0eee8] px-3 py-2 last:border-b-0"
+                  >
+                    <span className="text-sm text-[#4a4a4a]">
+                      {tier.minQuantity === 0 ? "Desde 0" : `Desde ${tier.minQuantity}`} {product.measureUnit}
+                    </span>
+                    <span className="text-sm font-semibold text-[#115e2c]">
+                      ${new Intl.NumberFormat("es-CL").format(tier.pricePerUnit)}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </section>
+
+            <section className="mt-5">
+              <h2 className="text-lg font-semibold text-[#0f0f0f]">Descripción</h2>
+              <p className="mt-2 text-sm text-[#4a4a4a]">{product.description}</p>
+            </section>
+
+            <section className="mt-5 rounded-xl border border-[#e8e6e0] p-3">
+              <h2 className="text-sm font-semibold text-[#0f0f0f]">Vendedor</h2>
+              <p className="mt-1 text-sm text-[#4a4a4a]">{product.sellerName}</p>
+              {product.sellerBusinessName ? (
+                <p className="text-xs text-[#8a8a8a]">{product.sellerBusinessName}</p>
+              ) : null}
+              <Link
+                href={`/perfil/${product.sellerId}`}
+                className="mt-2 inline-block text-sm font-medium text-[#16803c] underline"
+              >
+                Ver perfil
+              </Link>
+            </section>
+
+            <section className="mt-5 hidden rounded-2xl border border-[#e8e6e0] bg-[#fafaf7] p-4 md:flex md:items-center md:justify-between">
+              <div>
+                <p className="text-[11px] text-[#8a8a8a]">desde</p>
+                <p className="text-2xl font-bold text-[#115e2c]">${basePrice}/kg</p>
+              </div>
+              <Link
+                href={`/chat?productId=${product.id}`}
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-[#16803c] px-8 text-base font-semibold text-white"
+              >
+                Contactar
+              </Link>
+            </section>
           </div>
-        </section>
-
-        <section className="mt-5">
-          <h2 className="text-lg font-semibold text-[#0f0f0f]">Descripción</h2>
-          <p className="mt-2 text-sm text-[#4a4a4a]">{product.description}</p>
-        </section>
-
-        <section className="mt-5 rounded-xl border border-[#e8e6e0] p-3">
-          <h2 className="text-sm font-semibold text-[#0f0f0f]">Vendedor</h2>
-          <p className="mt-1 text-sm text-[#4a4a4a]">{product.sellerName}</p>
-          {product.sellerBusinessName ? <p className="text-xs text-[#8a8a8a]">{product.sellerBusinessName}</p> : null}
-          <Link href={`/perfil/${product.sellerId}`} className="mt-2 inline-block text-sm font-medium text-[#16803c] underline">
-            Ver perfil
-          </Link>
-        </section>
+        </div>
       </main>
 
-      <div className="fixed bottom-0 left-0 right-0 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between border-t border-[#f0eee8] bg-white px-4">
+      <div className="fixed bottom-0 left-0 right-0 mx-auto flex h-16 w-full max-w-[420px] items-center justify-between border-t border-[#f0eee8] bg-white px-4 md:hidden">
         <div>
           <p className="text-[11px] text-[#8a8a8a]">desde</p>
           <p className="text-lg font-bold text-[#115e2c]">${basePrice}/kg</p>

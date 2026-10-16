@@ -23,7 +23,7 @@ export default async function OnboardingPage() {
 
   return (
     <div className="min-h-screen bg-[#fafaf7]">
-      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-10 pt-6">
+      <main className="mx-auto min-h-screen w-full max-w-[420px] bg-white px-4 pb-10 pt-6 md:max-w-2xl md:px-8">
         <OnboardingForm state={initialOnboardingState} action={completeOnboarding} />
       </main>
     </div>

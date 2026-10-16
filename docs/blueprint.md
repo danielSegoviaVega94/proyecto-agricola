@@ -885,6 +885,28 @@ SENTRY_DSN=
 
 ## 17. Build Order — Plan de Ejecución TDD
 
+### Estado de ejecución actual
+
+Actualizado al **2026-05-05**.
+
+| Paso | Estado real | Commit de referencia |
+|------|-------------|----------------------|
+| 0 Bootstrap | ✅ Completo | `3a48148` |
+| 1 Supabase SSR | ✅ Completo | `3a48148` |
+| 2 Schema + Seed | ✅ Completo | `6ee3065` |
+| 3 Auth | ✅ Completo | `b794831` |
+| 4 Onboarding + Perfil | ✅ Completo | `6781a41` |
+| 5 Categorías | ✅ Completo | `920090e` |
+| 6 Crear producto | ✅ Completo | `f40a994` |
+| 7 Catálogo + Detalle | ✅ Completo | `5ecde09` |
+| 8 Conversaciones | ✅ Completo | `26229ac` |
+| 9 Cierre + Valoración | ✅ Completo | `79c6dad` incluye el estado acumulado actual de esa rama |
+| 10 Reportes | ✅ Completo | `0e49359` |
+| 11 Panel Admin | ✅ Completo | `9a454c9` |
+| 12 PWA | ✅ Completo | `79c6dad` |
+| 13 Deploy a Vercel | ⏳ Pendiente | — |
+| 14 Hardening Pre-Piloto | ⏳ Pendiente | — |
+
 > Cada paso es una unidad atómica que termina en *commit* verde (tests + lint + typecheck). El ejecutor abre una rama `feat/<slug>` por paso y un PR. **No avanzar al paso siguiente con CI rojo.**
 >
 > Convención TDD para cada paso: (a) escribir test que falla, (b) implementar mínimo para pasar, (c) refactor, (d) commit. Para infra (paso 0, 1, 2) los "tests" pueden ser scripts de verificación (e.g., `supabase db lint`, query de smoke).

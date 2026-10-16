@@ -61,3 +61,34 @@ Marketplace web mobile-first que conecta agricultores pequeños y medianos direc
 - **Sin notificaciones push** en el MVP.
 - **Sin pagos integrados** en el MVP.
 - **Sin logística integrada** en el MVP.
+
+---
+
+## Estado Implementado al 2026-05-05
+
+Este archivo describe el dominio. Ademas, desde esta fecha, el proyecto ya tiene implementado hasta el **Paso 12** del blueprint.
+
+### Comportamientos ya resueltos
+
+1. **Auth:** existe `/login` con tabs Google / telefono y fallback email para testing.
+2. **Onboarding:** los usuarios sin perfil pasan por `/onboarding` y luego tienen `/perfil/[id]`.
+3. **Productos:** existe flujo de publicacion, catalogo y detalle.
+4. **Conversaciones:** el chat real existe para conversaciones reales; productos demo abren una conversacion demo local para previsualizar el flujo UX.
+5. **Valoraciones:** tras cerrar un trato, cada parte puede valorar una sola vez.
+6. **Reportes:** una parte puede reportar a la otra desde el chat; el reporte queda en `reports` con `status='pending'`.
+7. **Moderacion:** existe panel `/admin/*` con reportes y usuarios; admins pueden suspender y reactivar cuentas.
+8. **Suspension:** un usuario suspendido no puede crear nuevas publicaciones y ve un banner explicativo.
+9. **PWA:** ya existe `manifest.webmanifest`, iconos instalables y generacion de service worker en build.
+
+### Decisiones UX ya tomadas
+
+- El acceso global a `Chat` fue removido del menu principal.
+- El chat se abre desde el contexto del producto o desde conversaciones existentes.
+- La plataforma usa copy en espanol de Chile y layout mobile-first.
+- Landing, catalogo y detalle ya usan imagenes visibles y no placeholders rotos.
+
+### Notas tecnicas vigentes
+
+- `middleware.ts` sigue operativo pero Next 16 ya sugiere migrarlo a `proxy`.
+- `pnpm build` usa `next build --webpack` por compatibilidad con la configuracion PWA.
+- Los artefactos de service worker se generan en build y no se consideran fuente manual.
